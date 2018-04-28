@@ -9,6 +9,7 @@
   "scripts": {
     "test": "gulp test",
     "correct-product-path": "node scripts/correct_product_paths/",
+    "delete-general-document": "node scripts/delete_general_document/",
     "correct-finalproduct-path": "node scripts/correct_finalproduct_paths/",
     "update-webdriver": "node node_modules/protractor/bin/webdriver-manager update",
     "start": "node server"
