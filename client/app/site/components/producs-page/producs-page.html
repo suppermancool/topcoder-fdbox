@@ -1,0 +1,62 @@
+<site-layout class="products-page">
+  <div class="steps">
+    <div class="step" ng-class="$ctrl.stepClass(1)">
+      <img ng-src="assets/images/s1.png" class="img-step" />
+      <img ng-src="assets/images/step-done.png" class="img-done" />
+      <h2>{{'STEP' | translate}} 1</h2>
+      <p>{{'P_STEP1' | translate}}</p>
+    </div>
+    <img ng-src="assets/images/arrow.png" class="arrow" />
+    <div class="step" ng-class="$ctrl.stepClass(2)">
+      <img ng-src="assets/images/s2-grey.png" class="img-step-before" />
+      <img ng-src="assets/images/s2.png" class="img-step" />
+      <img ng-src="assets/images/step-done.png" class="img-done" />
+      <h2>{{'STEP' | translate}} 2</h2>
+      <p>{{'P_STEP2' | translate}}</p>
+    </div>
+    <img ng-src="assets/images/arrow.png" class="arrow" />
+    <div class="step" ng-class="$ctrl.stepClass(3)">
+      <img ng-src="assets/images/s3-grey.png" class="img-step-before" />
+      <img ng-src="assets/images/s3.png" class="img-step" />
+      <img ng-src="assets/images/step-done.png" class="img-done" />
+      <h2>{{'STEP' | translate}} 3</h2>
+      <p>{{'P_STEP3' | translate}}</p>
+    </div>
+    <img ng-src="assets/images/arrow.png" class="arrow" />
+    <div class="step" ng-class="$ctrl.stepClass(4)">
+      <img ng-src="assets/images/s4-grey.png" class="img-step-before" />
+      <img ng-src="assets/images/s4.png" class="img-step" />
+      <img ng-src="assets/images/step-done.png" class="img-done" />
+      <h2>{{'STEP' | translate}} 4</h2>
+      <p>{{'P_STEP4' | translate}}</p>
+    </div>
+  </div>
+  <uib-progressbar value="$ctrl.progress"></uib-progressbar>
+  <div class="page-wrap">
+    <h1 class="product-title-container">{{$ctrl.activeTitle}}<span ng-if="$ctrl.selectedProduct.title">: </span>
+      <span class="product-title">{{$ctrl.selectedProduct.title}}</span>
+      <span ng-if="$ctrl.selectedProduct.description" class="description-span">{{$ctrl.selectedProduct.description}}</span>
+    </h1>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <uib-tabset active="$ctrl.activeStep" class="tabset">
+          <uib-tab index="1" class="tab">
+            <div ng-include src="'producs-page/tabs/s1.html'"></div>
+          </uib-tab>
+          <uib-tab index="2" class="tab">
+            <div ng-include src="'producs-page/tabs/s2.html'"></div>
+          </uib-tab>
+          <uib-tab index="3" class="tab">
+            <div ng-include src="'producs-page/tabs/s3.html'"></div>
+          </uib-tab>
+          <uib-tab index="41" class="tab">
+            <div ng-include src="'producs-page/tabs/s4-1.html'"></div>
+          </uib-tab>
+          <uib-tab index="42" class="tab">
+            <div ng-include src="'producs-page/tabs/s4-2.html'"></div>
+          </uib-tab>
+        </uib-tabset>
+      </div>
+    </div>
+  </div>
+</site-layout>

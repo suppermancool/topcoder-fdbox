@@ -1,0 +1,5 @@
+<div class="date-picker" tw-click-outside="$ctrl.closeDateOverlay()">
+  <h1 class="pull-left" id="title">{{'CALENDAR' | translate}}</h1>
+  <i class="pull-right" id="close" ng-click="$ctrl.closeDateOverlay()"></i>
+  <div uib-datepicker datepicker-options="$ctrl.defaultDatePickerOptions"  ng-model="$ctrl.model" ng-change="$ctrl.closeDateOverlay()" ng-model-options="{timezone: 'utc'}"></div>
+</div>

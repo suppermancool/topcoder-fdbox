@@ -1,0 +1,148 @@
+navbar-site {
+  position: fixed;
+  width: 100%;
+  margin: auto;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  color: $text-icons-color;
+
+  button {
+    background:none;
+    border:none;
+    padding:0;
+    cursor:pointer;
+    &:focus {
+      outline:0;
+    }
+  }
+
+  div.container {
+    background-color: $primary-text-color;
+    height: 60px;
+    padding: 0;
+    padding-left: 55px;
+    div {
+      height: 100%;
+      line-height: 60px;
+    }
+  }
+  ul {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    li {
+      display: inline-block;
+      height: 100%;
+      line-height: 60px;
+      vertical-align: middle;
+    }
+  }
+  .navi {
+    margin-left: 590px;
+    li {
+      padding: 0 5px;
+      margin-right: 20px;
+    }
+    .active {
+      border-bottom: 4px solid $accent-color;
+      button {
+        color: $text-icons-color;
+      }
+    }
+    button {
+      color: $secondary-text-color;
+      font-family: HelveticaNeueMedium;
+      font-weight: 600;
+      &:hover {
+        color: $text-icons-color;
+      }
+    }
+    a, a:hover, a:active, a:visited, a:focus {
+      text-decoration:none;
+    }
+
+  }
+  .action-buttons {
+    margin-right: 55px;
+    display: flex;
+    align-items: center;
+
+    .btn-primary{
+      background-color: $dark-primary-color;
+      border-color: $dark-primary-color;
+    }
+
+    .btn-primary:hover{
+      background-color: $primary-color;
+      border-color: $primary-color;
+    }
+
+    .btn{
+      width: 100px;
+    }
+
+    .btn:focus{
+      outline: 0;
+      z-index: 0;
+    }
+  }
+  .profile {
+    background-color: $dark-primary-color;
+    margin-left: 15px;
+    padding-left: 15px;
+    li {
+      padding: 0 16px;
+      &:first-child {
+        padding-right: 0;
+      }
+      &:last-child {
+        background-color: $primary-color;
+        cursor: pointer;
+        &:hover {
+          background-color: $dark-primary-color;
+        }
+      }
+      &.logout {
+        vertical-align: top;
+      }
+    }
+    p {
+      font-family: HelveticaNeueLight;
+      margin: 0;
+      line-height: normal;
+      padding-top: 12px;
+      display: inline-block;
+      button {
+        font-family: HelveticaNeueMedium;
+        color: $text-icons-color;
+      }
+    }
+    .account-settings {
+      margin-left: -15px;
+      padding: 0;
+      width: 190px;
+      .icon {
+        padding-left: 30px;
+        padding-right: 17px;
+        line-height: 56px;
+      }
+      .greetings {
+        color: white;
+        strong {
+          font-family: HelveticaNeueMedium;
+          display: inline-block;
+          white-space: nowrap;
+          overflow: hidden !important;
+          text-overflow: ellipsis;
+          max-width: 11ch;
+        }
+      }
+      .btn-account-settings {
+        display: block;
+        height: 100%;
+        padding-right: 16px;
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+<admin-layout>
+    <h1 class="page-header">
+      Manage product categories
+      <a href="/admin/categories/add" class="btn btn-primary pull-right">Add Product Category</a>
+    </h1>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Category Title</th>
+          <th>Category Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="category in $ctrl.categories.data">
+          <td><a href="/admin/categories/{{category.id}}">{{category.title}}</a></td>
+          <td>{{category.description}}</td>
+        </tr>
+      </tbody>
+    </table>
+</admin-layout>

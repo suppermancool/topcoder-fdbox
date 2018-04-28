@@ -1,0 +1,955 @@
+{
+	"variables": [],
+	"info": {
+		"name": "fbdox",
+		"_postman_id": "96ef3661-234f-23e7-388d-4deabddf3e66",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"description": "",
+			"item": [
+				{
+					"name": "admin-login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"jwt\", jsonData.token); "
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{srv}}/auth/local",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"email\":\"admin@fbdox.com\",\"password\":\"admin\"}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "user-login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"jwt\", jsonData.token); "
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{srv}}/auth/local",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"email\":\"user@fbdox.com\",\"password\":\"user\"}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "enterpriseOwner-login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"jwt\", jsonData.token); "
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{srv}}/auth/local",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"email\":\"enterprise@owner.com\",\"password\":\"user\"}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "enterpriseUser-login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"jwt\", jsonData.token); "
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{srv}}/auth/local",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"email\":\"enterprise@user.com\",\"password\":\"user\"}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "categories",
+			"description": "",
+			"item": [
+				{
+					"name": "categories",
+					"request": {
+						"url": "{{srv}}/api/categories",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "categories/get",
+					"request": {
+						"url": "{{srv}}/api/categories/58ece16cab623c6559e48000",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "categories/update",
+					"request": {
+						"url": "{{srv}}/api/categories/58ece16cab623c6559e48000",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"title\": \"Medical\"}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "categories/add",
+					"request": {
+						"url": "{{srv}}/api/categories",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"title\": \"TestCateg\"}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "categories/remove",
+					"request": {
+						"url": "{{srv}}/api/categories/58ece16cab623c6559e48000",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "invoices",
+			"description": "",
+			"item": [
+				{
+					"name": "invoices/:id",
+					"request": {
+						"url": "{{srv}}/api/invoices/58ece16cab623c6559e480ea",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"SIGNING_KNOWN\": \"y\",\n\"SIGNING_DATE\": \"2012-04-22\",\n\"NUMBER_OF_SHAREHOLDERS\": \"2\",\n\"NUMBER_OF_DIRECTORS\": \"2\",\n\"NOTARY\": \"Karina Rentar\",\n\"NOTARY_ADDRESS\": \"Montenegro South Korea\",\n\"NOTARY_KNOWN\": \"n\",\n\"NAME_OF_SHAREHOLDER_1\": \"Joey Cockerham\",\n\"TYPE_OF_SHAREHOLDER_1\": \"i\",\n\"POA_EXISTS_1\": \"y\",\n\"NAME_OF_REP_1\": \"Johnna Bram\",\n\"DOB_OF_REP_1\": \"2012-01-24\",\n\"ADDRESS_OF_REP_1\": \"Guinea\",\n\"NAME_OF_SHAREHOLDER_2\": \"Denna Harries\",\n\"TYPE_OF_SHAREHOLDER_2\": \"i\",\n\"DOB_OF_SHAREHOLDER_2\": \"2016-01-17\",\n\"REGAUTH_OF_SHAREHOLDER_2\": \"Arnetta Worm\",\n\"REGNO_OF_SHAREHOLDER_2\": \"rWwHv9noGLmJiJIAUv4\",\n\"ADDRESS_OF_SHAREHOLDER_2\": \"Lesotho\",\n\"POA_EXISTS_2\": \"y\",\n\"NAME_OF_REP_2\": \"Trudie Mcmahon\",\n\"DOB_OF_REP_2\": \"2012-03-02\",\n\"ADDRESS_OF_REP_2\": \"Zambia\",\n\"DOB_OF_SHAREHOLDER_1\": \"2014-12-25\",\n\"REGAUTH_OF_SHAREHOLDER_1\": \"Luke Ojito\",\n\"REGNO_OF_SHAREHOLDER_1\": \"g6a8Zd4PJ29AV\",\n\"ADDRESS_OF_SHAREHOLDER_1\": \"Taiwan\",\n\"COMPANY_NAME\": \"SomeOldNew Inc\",\n\"COMPANY_SEAT\": \"Biuroe\",\n\"COMPANY_BUSINESS\": \"ITC\",\n\"TOTAL_CAPITAL\": \"900.000$\",\n\"CAPITAL_OF_SHAREHOLDER_1\": \"400.000$\",\n\"PAIDIN_OF_SHAREHOLDER_1\": \"Morocco\",\n\"CAPITAL_OF_SHAREHOLDER_2\": \"300.000$\",\n\"PAIDIN_OF_SHAREHOLDER_2\": \"Kiribati\",\n\"COMPANY_FY\": \"Kosovo\",\n\"NAME_OF_ATTORNEY\": \"Japan\",\n\"ADDRESS_OF_ATTORNEY\": \"Panama\",\n\"MAX_COSTS\": 900000000\n\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "products",
+			"description": "",
+			"item": [
+				{
+					"name": "products",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"// should return 200",
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{srv}}/api/products",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "products/get",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{srv}}/api/products/58ece16cab623c6559e480e9",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "products/save",
+					"request": {
+						"url": "{{srv}}/api/products/58ece16cab623c6559e480e9",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"_id\": \"58ec9a980aebb82b0aa69fd5\",\n  \"title\": \"Product name lorem 2\",\n  \"description\": \"Lorem ipsum Incididunt deserunt sunt culpa.\",\n  \"category\": \"58ece16cab623c6559e48001\",\n  \"price\": 100\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "products/add",
+					"request": {
+						"url": "{{srv}}/api/products",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Product name lorem 2\",\n  \"description\": \"Lorem ipsum Incididunt deserunt sunt culpa.\",\n  \"category\": \"58ece16cab623c6559e48001\",\n  \"price\": 100\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "products/save-upload",
+					"request": {
+						"url": "{{srv}}/api/products/58ece16cab623c6559e480ea",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "fbdox.zip",
+									"value": ""
+								},
+								{
+									"key": "title",
+									"value": "New Product",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Lorem ipsum Incididunt deserunt sunt culpa.",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "58ece16cab623c6559e48001",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "2.99",
+									"type": "text"
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "products/add-upload",
+					"request": {
+						"url": "{{srv}}/api/products",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "fbdox.zip",
+									"value": ""
+								},
+								{
+									"key": "title",
+									"value": "New Product",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Lorem ipsum Incididunt deserunt sunt culpa.",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "58ece16cab623c6559e48001",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "2.99",
+									"type": "text"
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "products/get/interview",
+					"request": {
+						"url": "{{srv}}/api/products/58ece16cab623c6559e480ea/interview",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "products/save/interview",
+					"request": {
+						"url": "{{srv}}/api/products/58ece16cab623c6559e480ea/interview",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"SIGNING_KNOWN\": \"y\",\n\"SIGNING_DATE\": \"2012-04-22\",\n\"NUMBER_OF_SHAREHOLDERS\": \"2\",\n\"NUMBER_OF_DIRECTORS\": \"2\",\n\"NOTARY\": \"Karina Rentar\",\n\"NOTARY_ADDRESS\": \"Montenegro South Korea\",\n\"NOTARY_KNOWN\": \"n\",\n\"NAME_OF_SHAREHOLDER_1\": \"Joey Cockerham\",\n\"TYPE_OF_SHAREHOLDER_1\": \"i\",\n\"POA_EXISTS_1\": \"y\",\n\"NAME_OF_REP_1\": \"Johnna Bram\",\n\"DOB_OF_REP_1\": \"2012-01-24\",\n\"ADDRESS_OF_REP_1\": \"Guinea\",\n\"NAME_OF_SHAREHOLDER_2\": \"Denna Harries\",\n\"TYPE_OF_SHAREHOLDER_2\": \"i\",\n\"DOB_OF_SHAREHOLDER_2\": \"2016-01-17\",\n\"REGAUTH_OF_SHAREHOLDER_2\": \"Arnetta Worm\",\n\"REGNO_OF_SHAREHOLDER_2\": \"rWwHv9noGLmJiJIAUv4\",\n\"ADDRESS_OF_SHAREHOLDER_2\": \"Lesotho\",\n\"POA_EXISTS_2\": \"y\",\n\"NAME_OF_REP_2\": \"Trudie Mcmahon\",\n\"DOB_OF_REP_2\": \"2012-03-02\",\n\"ADDRESS_OF_REP_2\": \"Zambia\",\n\"DOB_OF_SHAREHOLDER_1\": \"2014-12-25\",\n\"REGAUTH_OF_SHAREHOLDER_1\": \"Luke Ojito\",\n\"REGNO_OF_SHAREHOLDER_1\": \"g6a8Zd4PJ29AV\",\n\"ADDRESS_OF_SHAREHOLDER_1\": \"Taiwan\",\n\"COMPANY_NAME\": \"SomeOldNew Inc\",\n\"COMPANY_SEAT\": \"Biuroe\",\n\"COMPANY_BUSINESS\": \"ITC\",\n\"TOTAL_CAPITAL\": \"900.000$\",\n\"CAPITAL_OF_SHAREHOLDER_1\": \"400.000$\",\n\"PAIDIN_OF_SHAREHOLDER_1\": \"Morocco\",\n\"CAPITAL_OF_SHAREHOLDER_2\": \"300.000$\",\n\"PAIDIN_OF_SHAREHOLDER_2\": \"Kiribati\",\n\"COMPANY_FY\": \"Kosovo\",\n\"NAME_OF_ATTORNEY\": \"Japan\",\n\"ADDRESS_OF_ATTORNEY\": \"Panama\",\n\"MAX_COSTS\": 900000000\n\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "delete product",
+					"request": {
+						"url": "{{srv}}/api/products/58ece16cab623c6559e480ea",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "products/:id/orders",
+					"request": {
+						"url": "{{srv}}/api/products/58ece16cab623c6559e480ea/orders",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"quantity\": 1,\n\t\"user\": \"58ece16cab623c6559e480e4\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "usage",
+			"description": "",
+			"item": [
+				{
+					"name": "overall usage",
+					"request": {
+						"url": "{{srv}}/api/users/usage",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"email\":\"admin\",\"password\":\"admin\"}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "get user usage",
+					"request": {
+						"url": "{{srv}}/api/users/58ece16cab623c6559e480e1/usage",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"email\":\"admin\",\"password\":\"admin\"}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users",
+			"description": "",
+			"item": [
+				{
+					"name": "list users",
+					"request": {
+						"url": "{{srv}}/api/users",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "get me",
+					"request": {
+						"url": "{{srv}}/api/users/me",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "get specific user",
+					"request": {
+						"url": "{{srv}}/api/users/58ece16cab623c6559e480e4",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "delete specific users",
+					"request": {
+						"url": "{{srv}}/api/users/58ece16cab623c6559e480e4",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "register/create user",
+					"request": {
+						"url": "{{srv}}/api/users",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"type\": \"enterprise\",\n  \"fname\": \"FName\",\n  \"lname\": \"LName\",\n  \"email\": \"email@fbdox.ent\",\n  \"password\": \"admin\",\n  \"company\": \"Enterprise\",\n  \"address\": \"SomeAddress\",\n  \"postcode\": 700700,\n  \"country\": \"Hungary\",\n  \"vatNumber\": \"54asd54564\",\n  \"preferences\": {\n    \"standardFontName\": \"Helvetica\",\n    \"standardFontSize\": \"14px\"\n  }\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "update me",
+					"request": {
+						"url": "{{srv}}/api/users/me",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"fname\": \"NewName\"}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "update specific user",
+					"request": {
+						"url": "{{srv}}/api/users/58ece16cab623c6559e480e2",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"fname\": \"NewName\"}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "change my email",
+					"request": {
+						"url": "{{srv}}/api/users/me",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\n    \"email\": \"enterprise@owner2.com\"\n  }"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "change email for user",
+					"request": {
+						"url": "{{srv}}/api/users/58ece16cab623c6559e480e2",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\n    \"email\": \"enterprise@owner2.com\"\n  }"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "upgrade user to enterprise",
+					"request": {
+						"url": "{{srv}}/api/users/me",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"type\": \"enterprise\"}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "change my password",
+					"request": {
+						"url": "{{srv}}/api/users/me/password",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"oldPassword\": \"admin\",\n\t\"newPassword\": \"newpass\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "get invoices by pecific user",
+					"request": {
+						"url": "{{srv}}/api/users/58ece16cab623c6559e480e4/invoices",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "get enterprice members",
+					"request": {
+						"url": "{{srv}}/api/users/58ece16cab623c6559e480e4/members",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "sendFilesViaMail",
+			"request": {
+				"url": "{{srv}}/api/finalprods/58f0a9cf49563c5e5b3c564b",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"SIGNING_KNOWN\": \"y\",\n\"SIGNING_DATE\": \"2012-04-22\",\n\"NUMBER_OF_SHAREHOLDERS\": \"2\",\n\"NUMBER_OF_DIRECTORS\": \"2\",\n\"NOTARY\": \"Karina Rentar\",\n\"NOTARY_ADDRESS\": \"Montenegro South Korea\",\n\"NOTARY_KNOWN\": \"n\",\n\"NAME_OF_SHAREHOLDER_1\": \"Joey Cockerham\",\n\"TYPE_OF_SHAREHOLDER_1\": \"i\",\n\"POA_EXISTS_1\": \"y\",\n\"NAME_OF_REP_1\": \"Johnna Bram\",\n\"DOB_OF_REP_1\": \"2012-01-24\",\n\"ADDRESS_OF_REP_1\": \"Guinea\",\n\"NAME_OF_SHAREHOLDER_2\": \"Denna Harries\",\n\"TYPE_OF_SHAREHOLDER_2\": \"i\",\n\"DOB_OF_SHAREHOLDER_2\": \"2016-01-17\",\n\"REGAUTH_OF_SHAREHOLDER_2\": \"Arnetta Worm\",\n\"REGNO_OF_SHAREHOLDER_2\": \"rWwHv9noGLmJiJIAUv4\",\n\"ADDRESS_OF_SHAREHOLDER_2\": \"Lesotho\",\n\"POA_EXISTS_2\": \"y\",\n\"NAME_OF_REP_2\": \"Trudie Mcmahon\",\n\"DOB_OF_REP_2\": \"2012-03-02\",\n\"ADDRESS_OF_REP_2\": \"Zambia\",\n\"DOB_OF_SHAREHOLDER_1\": \"2014-12-25\",\n\"REGAUTH_OF_SHAREHOLDER_1\": \"Luke Ojito\",\n\"REGNO_OF_SHAREHOLDER_1\": \"g6a8Zd4PJ29AV\",\n\"ADDRESS_OF_SHAREHOLDER_1\": \"Taiwan\",\n\"COMPANY_NAME\": \"SomeOldNew Inc\",\n\"COMPANY_SEAT\": \"Biuroe\",\n\"COMPANY_BUSINESS\": \"ITC\",\n\"TOTAL_CAPITAL\": \"900.000$\",\n\"CAPITAL_OF_SHAREHOLDER_1\": \"400.000$\",\n\"PAIDIN_OF_SHAREHOLDER_1\": \"Morocco\",\n\"CAPITAL_OF_SHAREHOLDER_2\": \"300.000$\",\n\"PAIDIN_OF_SHAREHOLDER_2\": \"Kiribati\",\n\"COMPANY_FY\": \"Kosovo\",\n\"NAME_OF_ATTORNEY\": \"Japan\",\n\"ADDRESS_OF_ATTORNEY\": \"Panama\",\n\"MAX_COSTS\": 900000000\n\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

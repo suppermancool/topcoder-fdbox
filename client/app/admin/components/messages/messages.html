@@ -1,0 +1,20 @@
+<admin-layout>
+    <h1 class="page-header">
+      Manage Wait Messages
+      <a href="/admin/messages/add" class="btn btn-primary pull-right">Add Message</a>
+    </h1>
+    <table class="table table-striped message-table">
+      <thead>
+        <tr>
+          <th class="message-num">#</th>
+          <th>Message Text</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="message in $ctrl.messages.data track by $index">
+          <td class="message-num"><a href="/admin/messages/{{message.id}}">{{$index + 1}}</a></td>
+          <td class="message-text">{{message.text}}</td>
+        </tr>
+      </tbody>
+    </table>
+</admin-layout>

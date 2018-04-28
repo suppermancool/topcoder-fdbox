@@ -1,0 +1,54 @@
+<site-layout class="profile-page">
+  <div class="page-wrap">
+    <h1>{{'USER_PROFILE' | translate}}</h1>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <uib-tabset active="activePill" vertical="true" type="pills" class="tabset">
+          <uib-tab index="0" heading="" class="tab">
+            <uib-tab-heading>
+              <i class="user-md fa-fw" aria-hidden="true"></i>
+              <span class="user-info">{{$ctrl.accountInfo.role !== $ctrl.constants.ENTERPRISE_USER ? 'ACC_INFO' : 'ACC_INFO_ENT_USER' | translate}}</span>
+              <div class="arrow-right"></div>
+            </uib-tab-heading>
+            <div ng-include src="'profile-page/tabs/acc-info-tab.html'"></div>
+          </uib-tab>
+          <uib-tab index="1" class="tab">
+            <uib-tab-heading>
+              <i class="fa fa-lock fa-fw" aria-hidden="true"></i> {{'CHANGE_PASS' | translate}}
+              <div class="arrow-right"></div>
+            </uib-tab-heading>
+            <div ng-include src="'profile-page/tabs/change-pass-tab.html'"></div>
+          </uib-tab>
+          <uib-tab index="2" class="tab" ng-if="$ctrl.accountInfo.isEnterprise">
+            <uib-tab-heading>
+              <i class="fa fa-fw" aria-hidden="true"><img ng-src="assets/images/icon-manage-payments.png" /></i> {{'MANAGE_PAYMENT' | translate}}
+              <div class="arrow-right"></div>
+            </uib-tab-heading>
+            <div ng-include src="'profile-page/tabs/manage-payment-tab.html'"></div>
+          </uib-tab>
+          <uib-tab index="3" class="tab" ng-if="$ctrl.accountInfo.isEnterprise || $ctrl.accountInfo.isAdmin" select="$ctrl.sortBy('username')">
+            <uib-tab-heading>
+              <i class="fa fa-fw" aria-hidden="true"><img ng-src="assets/images/icon-download-invoices.png" /></i> {{'DOWNLOAD_INV' | translate}}
+              <div class="arrow-right"></div>
+            </uib-tab-heading>
+            <div ng-include src="'profile-page/tabs/download-tab.html'"></div>
+          </uib-tab>
+          <uib-tab index="4" class="tab" ng-if="$ctrl.accountInfo.isEnterprise" select="$ctrl.sortBy('fname')">
+            <uib-tab-heading>
+              <i class="fa fa-cog fa-fw" aria-hidden="true"></i> {{'MANAGE_ACC' | translate}}
+              <div class="arrow-right"></div>
+            </uib-tab-heading>
+            <div ng-include src="'profile-page/tabs/manage-acc-tab.html'"></div>
+          </uib-tab>
+          <uib-tab index="5" heading="" class="tab" select="$ctrl.sortBy('companyName')">
+            <uib-tab-heading>
+              <span class="user-info">{{'RESUME_INTERVIEW' | translate}}</span>
+              <div class="arrow-right"></div>
+            </uib-tab-heading>
+            <div ng-include src="'profile-page/tabs/saved-interviews.html'"></div>
+          </uib-tab>
+        </uib-tabset>
+      </div>
+    </div>
+  </div>
+</site-layout>

@@ -1,0 +1,28 @@
+<div class="header">
+  <h2><span>{{$ctrl.activeSectionName}}</span></h2>
+</div>
+<!-- <h3 class="sub-header">{{'SECTION_1_SUBTITLE' | translate}}</h3> -->
+<form name="interviewF" ng-keypress="$ctrl.checkForm($event, interviewF)" autocomplete="off">
+  <div class="row">
+    <div class="col-xs-6">
+      <div class="section-wrap" ng-if="$ctrl.evalConditions(section)" ng-repeat="section in $ctrl.selectedProduct.interview.section" ng-class="{hide: $index + 1 != $ctrl.activeSection}">
+        <div ng-if="$ctrl.evalConditions(question)" ng-class="{'has-error': $ctrl.hasError(question, interviewF, $parent.$index + 1 != $ctrl.activeSection)}" class="form-group" ng-repeat="question in $parent.section.question">
+          <input-text ng-if="question.attrs.type == 0" label="{{question.attrs.name}}" name="{{question.attrs.var1}}" tooltip="{{question.attrs.help}}" model="$ctrl.interviewForm[question.attrs.var1]"  ng-init="$ctrl.interviewForm[question.attrs.var1] = $ctrl.interviewForm[question.attrs.var1] || question.attrs.default" is-focused="$index === 2"></input-text>
+          <input-select ng-if="question.attrs.type == 1" label="{{question.attrs.name}}" name="{{question.attrs.var1}}" tooltip="{{question.attrs.help}}" model="$ctrl.interviewForm[question.attrs.var1]" attrs="question.attrs" options="question.option" ng-init="$ctrl.interviewForm[question.attrs.var1] = $ctrl.interviewForm[question.attrs.var1] || question.attrs.default" interview="$ctrl.interviewForm"></input-select>
+          <input-datepicker ng-if="question.attrs.type == 3" label="{{question.attrs.name}}" name="{{question.attrs.var1}}" tooltip="{{question.attrs.help}}" model="$ctrl.interviewForm[question.attrs.var1]"></input-datepicker>
+          <input-number ng-if="question.attrs.type == 4" label="{{question.attrs.name}}" name="{{question.attrs.var1}}" tooltip="{{question.attrs.help}}" model="$ctrl.interviewForm[question.attrs.var1]"  ng-init="$ctrl.interviewForm[question.attrs.var1] = $ctrl.interviewForm[question.attrs.var1] || question.attrs.default"></input-number>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div ng-if="$ctrl.evalConditions(section)" ng-repeat="section in $ctrl.selectedProduct.interview.section" ng-class="{hide: $index + 1 != $ctrl.activeSection}">
+    <div ng-if="$ctrl.evalConditions(statement)" class="price-row" ng-repeat="statement in $parent.section.statement">
+      <label>{{statement.attrs.name}} <i class="fa fa-info" ng-if="statement.attrs.help" uib-tooltip="{{statement.attrs.help}}"></i></label>
+      <p ng-class="{'text-danger': $ctrl.evalTests(statement)}">{{$ctrl.evalStatement(statement.attrs)}}</p>
+    </div>
+  </div>
+</form>
+<div class="footer">
+  <button class="btn btn-default" role="button" ng-class="{disabled: !$ctrl.isSectionDone(interviewF)}" ng-click="$ctrl.nextSection(interviewF)">{{'NEXT' | translate}}</button>
+  <button class="btn btn-default btn-secondary" role="button" ng-click="$ctrl.prevSection()">{{'PREVIOUS' | translate}}</button>
+</div>

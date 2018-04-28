@@ -1,0 +1,1149 @@
+swagger: '2.0'
+info:
+  version: '1.0'
+  title: fbdox-api
+  license:
+    name: MIT
+    url: 'http://github.com/gruntjs/grunt/blob/master/LICENSE-MIT'
+schemes:
+  - http
+  - https
+securityDefinitions:
+  jwt:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: JWT Authentication. Provide API Key in the form 'Bearer &lt;token&gt;'.
+paths:
+  /auth/local:
+    post:
+      description: User login
+      summary: User login, annonymous
+      tags:
+        - auth
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          required: true
+          description: email and password
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+              password:
+                type: string
+      responses:
+        200:
+          description: The user jwt token
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+        401:
+          description: Authentication errors
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error, operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+
+  /users:
+    get:
+      summary: Get users, admin or enterprise
+      description: |
+        Retrieve list of users
+
+        If logged user is admin, list all users
+
+        If logged user is enterprise, list users under that enterprise account
+      security:
+        - jwt: []
+      produces:
+        - application/json
+      tags:
+        - Users
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/UserProfile'
+        401:
+          description: Unauthorized, no authorization provided
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden, user doesn't have access to resource
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      summary: Create/Register user, annonymous or enterprise
+      security:
+        - jwt: []
+      tags:
+        - Users
+      description: |
+        Create/register user
+
+        If there's an authenticated user and that user is enterprise, the new user is attached to the enterprise account
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/UserParam'
+      responses:
+        200:
+          description: On user register will return auth token for authentication
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+        201:
+          description: When enterprise adds an user, returns the new user
+          schema:
+           $ref: '#/definitions/UserProfile'
+        422:
+            description: Validation error
+            schema:
+              $ref: '#/definitions/ValidationError'
+  /users/{id}:
+    get:
+      security:
+        - jwt: []
+      tags:
+        - User
+      description: Get specific user
+      summary: Get user, admin or enterprise
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        200:
+          description: The specified user
+          schema:
+            $ref: '#/definitions/UserDetailedProfile'
+        401:
+          description: Unauthorized, no authorization provided
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden, user doesn't have access to resource
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: User not found
+        400:
+          description: Invalid request, provided id is not valid
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      security:
+        - jwt: []
+      description: Update specific user
+      summary: Update user, admin or enterprise
+      tags:
+        - User
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateUserParam'
+      responses:
+        200:
+          description: The updated user
+          schema:
+            $ref: '#/definitions/UserDetailedProfile'
+        400:
+          description: Invalid request, provided id is not valid
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Unauthorized, no authorization provided
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden, user doesn't have access to resource
+          schema:
+            $ref: '#/definitions/Error'
+        422:
+          description: Invalid request data, validation failed
+          schema:
+            $ref: '#/definitions/ValidationError'
+        404:
+          description: User not found
+    delete:
+      security:
+        - jwt: []
+      description: Delete user
+      summary: Delete user, admin or enterprise
+      tags:
+        - User
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        204:
+          description: No content
+        400:
+          description: Invalid request, provided id is not valid
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Unauthorized, no authorization provided
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden, user doesn't have access to resource
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: User not found
+  /users/me:
+    get:
+      security:
+        - jwt: []
+      description: Get currently logged user
+      summary: Get my info, authenticated
+      tags:
+        - User[me]
+      responses:
+        200:
+          description: Current user
+          schema:
+            $ref: '#/definitions/User'
+        401:
+          description: Unauthorized, no authorization provided
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      security:
+        - jwt: []
+      tags:
+        - User[me]
+      description: Update current user
+      summary: Update my info, authenticated
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/UserParam'
+      responses:
+        200:
+          description: The updated user
+          schema:
+            $ref: '#/definitions/UserDetailedProfile'
+        401:
+          description: Unauthorized, no authorization provided
+          schema:
+            $ref: '#/definitions/Error'
+        422:
+          description: Invalid request data, validation failed
+          schema:
+            $ref: '#/definitions/ValidationError'
+  /users/me/password:
+    put:
+      security:
+        - jwt: []
+      tags:
+        - User[me]
+      description: Change current user's password
+      summary: Change my password, authenticated
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              oldPassword:
+                type: string
+              newPassword:
+                type: string
+      responses:
+        204:
+          description: OK
+        400:
+          description: Bad request, old & new password shouldn't match
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Unauthorized, no authorization provided
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden - invalid oldPassword
+        422:
+          description: Invalid request data, validation failed
+          schema:
+            $ref: '#/definitions/ValidationError'
+  /users/{userId}/usage:
+    get:
+      security:
+        - jwt: []
+      tags:
+        - Usage
+      description: Get usage details/reports for specified user
+      summary: Get usage for user, admin only
+      produces:
+        - application/json
+        - application/octet-stream
+      consumes:
+        - application/json
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          type: string
+          description: Specify an user to get usage details for
+      responses:
+        200:
+          description: The csv with the ussage report
+        401:
+          description: Unauthorized, no authorization provided
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden, user doesn't have access to resource
+          schema:
+            $ref: '#/definitions/Error'
+  /users/usage:
+    get:
+      security:
+        - jwt: []
+      tags:
+        - Usage
+      description: Get usage details/reports for all users
+      summary: Get overall usage, admin only
+      produces:
+        - application/json
+        - application/octet-stream
+      consumes:
+        - application/json
+      responses:
+        '200':
+          description: The csv with the ussage report
+        401:
+          description: Unauthorized, no authorization provided
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden, user doesn't have access to resource
+          schema:
+            $ref: '#/definitions/Error'
+
+  /products:
+    get:
+      tags:
+        - Products
+      description: Get all products
+      summary: Get products, annonymous
+      responses:
+        '200':
+          description: List of products
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/Product'
+    post:
+      security:
+        - jwt: []
+      tags:
+        - Products
+      consumes:
+        - application/json
+        - multipart/form-data
+      description: Add new product
+      summary: Create product, admin only
+      parameters:
+        - name: file
+          type: file
+          description: the zip file to be uploaded
+          required: false
+          in: formData
+        - name: identifier
+          type: string
+          in: formData
+          description: User (admin) defined Identifier
+        - name: title
+          type: string
+          description: Product title
+          in: formData
+        - name: description
+          type: string
+          description: Product description
+          in: formData
+        - name: category
+          type: string
+          description: CategoryId or the whole category object
+          in: formData
+        - name: price
+          type: number
+          description: Product price (>= 0)
+          in: formData
+      responses:
+        201:
+          description: The new product
+          schema:
+            $ref: '#/definitions/Product'
+        401:
+          description: Unauthorized, no authorization provided
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden, user doesn't have access to resource
+          schema:
+            $ref: '#/definitions/Error'
+        422:
+          description: Validation error
+          schema:
+            $ref: '#/definitions/ValidationError'
+  /products/{id}:
+    get:
+      tags:
+        - Product
+      description: Get product
+      summary: Get product, annonymous
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+          description: Product id
+      responses:
+        200:
+          description: Product
+          schema:
+            $ref: '#/definitions/Product'
+        400:
+          description: Invalid request, provided id is not valid
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: Product not found
+    put:
+      security:
+        - jwt: []
+      tags:
+        - Product
+      consumes:
+        - application/json
+        - multipart/form-data
+      description: Update product
+      summary: Update product, admin only
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+          description: Product id
+        - name: file
+          type: file
+          description: the zip file to be uploaded
+          required: false
+          in: formData
+        - name: identifier
+          type: string
+          in: formData
+          description: User (admin) defined Identifier
+        - name: title
+          type: string
+          description: Product title
+          in: formData
+        - name: description
+          type: string
+          description: Product description
+          in: formData
+        - name: category
+          type: string
+          description: CategoryId or the whole category object
+          in: formData
+        - name: price
+          type: number
+          description: Product price (>= 0)
+          in: formData
+      responses:
+        200:
+          description: Updated product
+          schema:
+            $ref: '#/definitions/Product'
+        400:
+          description: Invalid request, provided id is not valid
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Unauthorized, no authorization provided
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden, user doesn't have access to resource
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: Product not found
+        422:
+          description: Invalid request data, validation failed
+          schema:
+            $ref: '#/definitions/ValidationError'
+    delete:
+      security:
+        - jwt: []
+      tags:
+        - Product
+      description: Delete product
+      summary: Delete product, admin only
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+          description: Product id
+      responses:
+        204:
+          description: Ok
+        400:
+          description: Invalid request, provided id is not valid
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Unauthorized, no authorization provided
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden, user doesn't have access to resource
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: Product not found
+  /products/{id}/interview:
+    get:
+      security:
+        - jwt: []
+      tags:
+        - Interview
+      description: Get product interview data
+      summary: Get interview questions, authenticated
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+          description: Product id
+      responses:
+        200:
+          description: Product including interview data
+          schema:
+            $ref: '#/definitions/ProductInterview'
+        400:
+          description: Invalid request, provided id is not valid
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Unauthorized, no authorization provided
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: Product not found
+    post:
+      security:
+        - jwt: []
+      tags:
+        - Interview
+      description: Submit user's responses to interview
+      summary: Submit interview answers, authenticated
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+          description: Product id
+        - name: body
+          in: body
+          required: true
+          description: User's responses to interview questions
+          schema:
+            $ref: '#/definitions/InterviewParam'
+      responses:
+        200:
+          description: Dwnload urls for files and previews
+          schema:
+            $ref: '#/definitions/ProductInterviewResponse'
+        400:
+          description: Invalid request, provided id is not valid
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Unauthorized, no authorization provided
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: Product not found
+
+  /categories:
+    get:
+      tags:
+        - Categories
+      description: Get all categories
+      summary: Get categories, annonymous
+      responses:
+        200:
+          description: List of categories
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/definitions/ProductCategory'
+    post:
+      security:
+        - jwt: []
+      tags:
+        - Categories
+      description: Add new category
+      summary: Create new category, admin only
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ProductCategoryParam'
+      responses:
+        201:
+          description: The new product category
+          schema:
+            $ref: '#/definitions/ProductCategory'
+        401:
+          description: Unauthorized, no authorization provided
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden, user doesn't have access to resource
+          schema:
+            $ref: '#/definitions/Error'
+        422:
+          description: Validation error
+          schema:
+            $ref: '#/definitions/ValidationError'
+  /categories/{id}:
+    get:
+      tags:
+        - Category
+      description: Get product category
+      summary: Get category details, annonymous
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+          description: Product category id
+      responses:
+        200:
+          description: Product category
+          schema:
+            $ref: '#/definitions/ProductCategory'
+        400:
+          description: Invalid request, provided id is not valid
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Unauthorized, no authorization provided
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden, user doesn't have access to resource
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: Category not found
+    put:
+      security:
+        - jwt: []
+      tags:
+        - Category
+      description: Update product category
+      summary: Update category details, admin only
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+          description: Product category id
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ProductCategoryParam'
+      responses:
+        200:
+          description: Updated product category
+          schema:
+            $ref: '#/definitions/ProductCategory'
+        400:
+          description: Invalid request, provided id is not valid
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Unauthorized, no authorization provided
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden, user doesn't have access to resource
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: Category not found
+    delete:
+      security:
+        - jwt: []
+      tags:
+        - Category
+      description: Delete product category (Admin only)
+      summary: Delete category, admin only
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+          description: Product category id
+      responses:
+        204:
+          description: Ok
+        400:
+          description: Invalid request, provided id is not valid or category is in use
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Unauthorized, no authorization provided
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Forbidden, user doesn't have access to resource
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: Category not found
+
+  /finalprods/{id}:
+    post:
+      security:
+        - jwt: []
+      tags:
+        - Interview
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+          description: Final product id
+      description: Send final product archive to user via mail (current user's email)
+      summary: Mail specific generated interview to user, authenticated
+      responses:
+        204:
+          description: Ok
+        401:
+          description: Unauthorized, no authorization provided
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: FinalProduct not found
+        500:
+          description: Server error (mail mallconfigured)
+
+definitions:
+  Error:
+    type: object
+    properties:
+      code:
+        type: string
+      message:
+        type: string
+  ValidationError:
+    type: object
+    properties:
+      name:
+        type: string
+        description: ="ValidationError"
+      message:
+        type: string
+      errors:
+        type: object
+        description: Object containing validation errors
+        properties:
+          '[errorPath]':
+            type: object
+            properties:
+              message:
+                type: string
+              name:
+                type: string
+              kind:
+                type: string
+              path:
+                type: string
+              value:
+                type: string
+              properties:
+                type: object
+                description: Error related properties
+
+  UserParam:
+    type: object
+    properties:
+      type:
+        type: string
+        description: |
+          Only accepts 'enterprise' value.
+          If passed value is enterprise, then the account will be created/updated as enterprise.
+          Note: cannot change from enterprise to normal user
+      fname:
+        type: string
+      lname:
+        type: string
+      email:
+        type: string
+      password:
+        type: string
+      company:
+        type: string
+      address:
+        type: string
+      postcode:
+        type: string
+      country:
+        type: string
+      vatNumber:
+        type: string
+      preferences:
+        type: object
+        properties:
+          standardFontName:
+            type: string
+          standardFontSize:
+            type: string
+
+  UpdateUserParam:
+    type: object
+    properties:
+      type:
+        type: string
+        description: |
+          Only accepts 'enterprise' value.
+          If passed value is enterprise, then the account will be created/updated as enterprise.
+          Note: cannot change from enterprise to normal user
+      fname:
+        type: string
+      lname:
+        type: string
+      email:
+        type: string
+      company:
+        type: string
+      address:
+        type: string
+      postcode:
+        type: string
+      country:
+        type: string
+      vatNumber:
+        type: string
+      preferences:
+        type: object
+        properties:
+          standardFontName:
+            type: string
+          standardFontSize:
+            type: string
+
+  User:
+    type: object
+    properties:
+      id:
+        type: string
+      updatedAt:
+        type: string
+      createdAt:
+        type: string
+      fname:
+        type: string
+      lname:
+        type: string
+      email:
+        type: string
+      role:
+        $ref: '#/definitions/Role'
+      provider:
+        type: string
+      company:
+        type: string
+      address:
+        type: string
+      postcode:
+        type: string
+      country:
+        type: string
+      vatNumber:
+        type: string
+      enterprise:
+        $ref: '#/definitions/EnterpriseAccount'
+      preferences:
+        type: object
+        properties:
+          standardFontName:
+            type: string
+          standardFontSize:
+            type: string
+  UserProfile:
+    type: object
+    properties:
+      id:
+        type: string
+      fullName:
+        type: string
+      email:
+        type: string
+      role:
+        $ref: '#/definitions/Role'
+      company:
+        type: string
+
+  UserDetailedProfile:
+    type: object
+    properties:
+      id:
+        type: string
+      fullName:
+        type: string
+      fname:
+        type: string
+      lname:
+        type: string
+      email:
+        type: string
+      role:
+        $ref: '#/definitions/Role'
+      company:
+        type: string
+      address:
+        type: string
+      postcode:
+        type: string
+      country:
+        type: string
+      vatNumber:
+        type: string
+      enterprise:
+        $ref: '#/definitions/EnterpriseAccount'
+      preferences:
+        type: object
+        properties:
+          standardFontName:
+            type: string
+          standardFontSize:
+            type: string
+  EnterpriseAccount:
+    type: object
+    description: Enterprise account, if current user is enterprise-user.
+    properties:
+      id:
+        type: string
+      fname:
+        type: string
+      lname:
+        type: string
+      email:
+        type: string
+      company:
+        type: string
+      address:
+        type: string
+      postcode:
+        type: string
+      country:
+        type: string
+      vatNumber:
+        type: string
+      preferences:
+        type: object
+        properties:
+          standardFontName:
+            type: string
+          standardFontSize:
+            type: string
+  Role:
+    type: string
+    enum:
+      - admin
+      - user
+      - enterprise
+      - enterprise-user
+  ProductCategoryParam:
+    type: object
+    properties:
+      title:
+        type: string
+  ProductCategory:
+    type: object
+    properties:
+      id:
+        type: string
+      updatedAt:
+        type: string
+      createdAt:
+        type: string
+      title:
+        type: string
+  Product:
+    type: object
+    properties:
+      id:
+        type: string
+      identifier:
+        type: string
+        description: User (admin) defined Identifier
+      title:
+        type: string
+      description:
+        type: string
+      category:
+        $ref: '#/definitions/ProductCategory'
+      price:
+        type: number
+      templates:
+        type: number
+      interview:
+        type: string
+  ProductInterview:
+    type: object
+    properties:
+      id:
+        type: string
+      identifier:
+        type: string
+        description: User (admin) defined Identifier
+      updatedAt:
+        type: string
+      createdAt:
+        type: string
+      title:
+        type: string
+      description:
+        type: string
+      category:
+        $ref: '#/definitions/ProductCategory'
+      price:
+        type: number
+      interview:
+        $ref: '#/definitions/Interview'
+
+  InterviewParam:
+    type: object
+    description: |
+      Object with keys from question's 'var1/var2/var3' and user provided response
+
+      eg.: For {attrs: {var1: "COMPANY_NAME", ...rest_of_attrs}}
+      One should provide: {COMPANY_NAME: "user provided response"}
+    properties:
+      [varName]:
+        type: string
+        description: Pairs
+  Interview:
+    type: object
+    properties:
+      attrs:
+        type: object
+        properties:
+          name:
+            type: string
+            description: Name of the interview
+      question:
+        type: array
+        items:
+          $ref: '#/definitions/InterviewQuestion'
+
+  InterviewQuestion:
+    type: object
+    properties:
+      attrs:
+        type: object
+        properties:
+          name:
+            type: string
+            description: Name of the interview
+          help:
+            type: string
+            description: Help text to be displayed to user beside the input
+          'type':
+            type: number
+            description: >
+              The input type
+              0 = text, 1 = radio, 2 = checkbox, 3 = date, 4 = number
+          'default':
+            type: string
+            description: The default value of the input
+          var1:
+            type: string
+            description: The variable name which should hold the input's value
+      option:
+        type: array
+        items:
+          type: object
+          properties:
+            attrs:
+              type: object
+              properties:
+                name:
+                  type: string
+                result1:
+                  type: string
+                  description: >
+                    The value of result1 should be assigned to var1
+                    So on for result2 and var2 and so on.
+
+  ProductInterviewResponse:
+    type: object
+    properties:
+      documents:
+        type: array
+        items:
+          type: object
+          properties:
+            title:
+              type: string
+            downloadUrl:
+              type: string
+            previewUrl:
+              type: string
+      downloadAllUrl:
+        type: string
+      finalProductId:
+        type: string
+
+

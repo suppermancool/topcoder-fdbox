@@ -1,0 +1,20 @@
+<uib-accordion close-others="false">
+  <div uib-accordion-group class="panel-default" ng-init="$ctrl['as'+$index] = false" is-open="$ctrl['as'+$index]" ng-repeat="section in $ctrl.selectedProduct.interview.section" ng-if="$ctrl.evalConditions(section)">
+    <uib-accordion-heading>
+      <span class="title">{{section.attrs.name}}</span> <i class="pull-right fa" ng-class="{'fa-plus': !$ctrl['as'+$index], 'fa-minus': $ctrl['as'+$index]}"></i>
+    </uib-accordion-heading>
+    <div ng-if="$ctrl.evalConditions(question)" class="section-row" ng-repeat="question in $parent.$parent.section.question">
+      <p>{{question.attrs.name}}</p>
+      <p>{{$ctrl.selectFields[question.attrs.name] ? $ctrl.selectFields[question.attrs.name][$ctrl.safeVal(question.attrs.var1)] : $ctrl.safeVal(question.attrs.var1)}}</p>
+    </div>
+    <div ng-if="$ctrl.evalConditions(statement)" class="price-row" ng-repeat="statement in $parent.$parent.section.statement">
+      <p>{{statement.attrs.name}}</p>
+      <p>{{$ctrl.interviewForm[statement.attrs.var1]}}</p>
+    </div>
+  </div>
+
+  <div class="footer no-top-border">
+    <button class="btn btn-default" role="button" ng-class="{disabled: $ctrl.generatingDocs}" ng-click="$ctrl.stepNext()">{{'NEXT' | translate}} <spinner ng-show="$ctrl.loading"></spinner></button>
+    <button class="btn btn-default btn-secondary" role="button" ng-click="$ctrl.stepBack()">{{'BACK' | translate}}</button>
+  </div>
+</uib-accordion>

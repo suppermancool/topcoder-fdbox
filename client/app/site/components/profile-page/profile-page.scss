@@ -1,0 +1,174 @@
+.profile-page {
+  .page-wrap {
+    padding: 0 45px;
+    h1 {
+      font-family: HelveticaNeue;
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+    .panel {
+      border-radius: 0;
+      box-shadow: none;
+      margin-bottom: 110px;
+      min-height: calc(87vh - 70px);
+      &.panel-default {
+        border-color: #ebebeb;
+        .panel-body{
+          height: 689px;
+          .user-md{
+            content: '';
+            display: block;
+            height: 18px;
+            width: 14px;
+            position: absolute;
+            top: 25px;
+            left: 25px;
+            background: rgba(248, 230, 174, 0) url("/assets/images/user.png") no-repeat 0 0;
+          }
+          .user-info{
+            margin-left: 37px;
+            display: block;
+            padding-top: 6px;
+          }
+        }
+      }
+      .tabset {
+        display: flex;
+        .nav-pills {
+          flex: 1;
+          background-color: $primary-text-color;
+          height: 647px;
+          & > li+li {
+            margin-top: 0;
+          }
+          & > li > a {
+            border-radius: 0;
+            background-color: $primary-text-color;
+            color: $text-icons-color;
+            font-family: HelveticaNeue;
+            font-size: 16px;
+            border-bottom: 1px solid transparentize($text-icons-color, 0.85);
+            padding: 20px;
+            uib-tab-heading {
+              i {
+                margin-right: 10px;
+              }
+              .arrow-right {
+                width: 0;
+                height: 0;
+                border-top: 7px solid transparent;
+                border-bottom: 7px solid transparent;
+                border-left: 6px solid $dark-primary-color;
+                position: absolute;
+                display: none;
+                right: -5px;
+                top: 50%;
+                margin-top: -5px;
+              }
+            }
+          }
+          & > li.active > a {
+            background-color: $dark-primary-color;
+            border-left: 7px solid $accent-color;
+            .arrow-right {
+              display: block;
+            }
+            i {
+              margin-left: -7px;
+            }
+            span{
+              margin-left: 30px;
+            }
+          }
+        }
+        .tab-content{
+          flex: 3;
+          margin-left: 20px;
+          .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #ebebeb;
+            padding: 6px 0;
+            margin-bottom: 20px;
+            height: 49px;
+            h2 {
+              font-family: HelveticaNeue;
+              font-size: 22px;
+              flex: 1;
+              margin: 0;
+              align-self: center;
+              line-height: 35px;
+            }
+            .btn {
+              margin-left: 10px;
+            }
+          }
+          p {
+            line-height: 24px;
+            &.label {
+              font-size: 14px;
+              color: $primary-text-color;
+              padding: 0;
+              margin-bottom: 10px;
+              display: inline-block;
+            }
+            &.val {
+              font-family: HelveticaNeueMedium;
+              font-size: 14px;
+              color: $primary-text-color;
+              font-weight: bold;
+              margin-bottom: 20px;
+            }
+          }
+          .radio-group {
+            .col-xs-6 {
+              border: none;
+              padding: 0;
+            }
+          }
+          .col-md-6:first-child {
+            padding-left: 0;
+          }
+          .col-md-6:last-child {
+            padding-right: 0;
+          }
+
+          .non-edit {
+            p {
+              height: 24px;
+              margin-bottom: 20px;
+            }
+            .empty-row {
+              display: block;
+              height: 88px;
+            }
+          }
+        }
+      }
+    }
+
+    .table tbody tr td.actions{
+      .btn-delete, .btn-edit{
+        padding: 5px 9px;
+        margin-right: 6px;
+      }
+    }
+
+
+  }
+  .form-group {
+    &.empty-row {
+      position: relative;
+      height: 74px;
+      margin-bottom: 15px;
+    }
+  }
+  .acc-info {
+    .form-control[disabled],
+    .form-control[readonly],
+    fieldset[disabled] .form-control {
+      background-color: transparent;
+    }
+  }
+}

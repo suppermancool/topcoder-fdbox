@@ -1,0 +1,45 @@
+<admin-layout>
+    <div class="loading" ng-show="$ctrl.loading"></div>
+    <h1 class="page-header">
+      Manage users
+    </h1>
+    <div class="users-opt-bar">
+    <div class="dl-zip">
+      <input-datepicker label="Start Date" name="startDate" tooltip="" model="$ctrl.dateStart"></input-datepicker>
+      <input-datepicker label="End Date" name="EndDate" tooltip="" model="$ctrl.dateEnd"></input-datepicker>
+      <button class="btn btn-primary" ng-class="{disabled: !$ctrl.isValidDateRange() || $ctrl.generatingZip}" ng-click="$ctrl.downloadInvoicesZip()">Download User Invoices</button>
+    </div>
+    <div class"exp-usage">
+      <a href="/api/users/usage" class="btn btn-primary" target="_blank">Export overall usage details</a>
+    </div>
+    </div>
+    <table class="table table-striped manage-user">
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>Actions</th>
+          <th>Invoice Select</th>
+          <th>Invoice Download</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="user in $ctrl.users.data">
+          <td><a href="/admin/users/{{user.id}}">{{user.email}}</a></td>
+          <td>
+            <a href="/api/users/{{user.id}}/usage" target="_blank">
+              <span class="glyphicon glyphicon-download-alt" title="Download usage details for {{user.fullName}}"></span>
+            </a>
+          </td>
+          <td>
+            <div class="select-placeholder" ng-if="user.invoices.length == 0" >&nbsp;</div>
+            <select class="invoice-select" ng-if="user.invoices.length >= 1"  ng-options="invoice.title for invoice in user.invoices"  ng-model="user.selected" ng-init="user.selected = user.invoices[0]"></select>
+          </td>
+          <td>
+            <a href="#" ng-click="$ctrl.downloadInvoice(user.selected.invoiceId, user.selected.type)" ng-show="user.selected.invoiceId">
+              <span class="glyphicon glyphicon-download-alt" title="Download invoice details of {{user.selected.title}}"></span>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+</admin-layout>

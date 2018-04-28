@@ -1,0 +1,26 @@
+<div class="header no-button-tab">
+        <h2>{{'RESUME_INTERVIEW' | translate}}</h2>
+        <button ng-if="$ctrl.interviews.length > 1" class="btn btn-default" href="#" role="button" ng-click="$ctrl.deleteAllInterviews()">{{'DELETE_ALL' | translate}}</button>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th ng-click="$ctrl.sortBy('companyName')">{{'COMPANY_NAME' | translate}} <span ng-class="{active: $ctrl.sortPropertyName === 'companyName' }">{{$ctrl.sortReverse == false ? '&dtrif;' : '&utrif;'}}</span></th>
+            <th ng-click="$ctrl.sortBy('title')">{{'TITLE' | translate}} <span ng-class="{active: $ctrl.sortPropertyName === 'title' }">{{$ctrl.sortReverse == false ? '&dtrif;' : '&utrif;'}}</span></th>
+            <th class="text-center" ng-click="$ctrl.sortBy('date')">{{'DATE_OF_PUR' | translate}} <span ng-class="{active: $ctrl.sortPropertyName === 'date' }">{{$ctrl.sortReverse == false ? '&dtrif;' : '&utrif;'}}</span></th>
+            <th class="text-center">{{'ACTION' | translate}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="row in $ctrl.interviews | startFrom:($ctrl.paginationPageNumm-1)*$ctrl.paginationPageSize | limitTo:$ctrl.paginationPageSize | orderBy:$ctrl.sortPropertyName:$ctrl.sortReverse">
+            <td>{{row.companyName || 'N/A'}}</td>
+            <td>{{row.title}}</td>
+            <td class="text-center">{{row.date | date : 'd.M.yyyy'}}</td>
+            <td class="text-center interview-actions">
+                <button class="btn btn-default" href="#" role="button" ng-click="$ctrl.resumeInterview(row.id)">{{'OPEN' | translate}}</button>
+                <button class="btn btn-default" href="#" role="button" ng-click="$ctrl.deleteInterview(row)">{{'DELETE_TITLE' | translate}}</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <ul ng-if="$ctrl.interviews.length" uib-pagination total-items="$ctrl.interviews.length" ng-model="$ctrl.paginationPageNumm" max-size="5" items-per-page="$ctrl.paginationPageSize" class="pagination-sm pull-right" boundary-links="false" previous-text="&ltrif;" next-text="&rtrif;"></ul>

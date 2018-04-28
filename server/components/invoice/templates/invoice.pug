@@ -1,0 +1,71 @@
+doctype html
+html.no-js
+    head
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        title
+        meta(name='description', content='')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        each css in cssResource
+            link(rel='stylesheet', href=css, type='text/css')
+    body.layout
+        .row
+            if invoice.companyLogo
+                .col-xs-8.logo
+                    img(src=`file://${invoice.logoPath}`)
+        .row
+            if invoice.number
+                .col-xs-12.invoice #{invoice.invoiceLabel} ##{invoice.number} vom #{invoice.dateFormatted}
+            if !invoice.number
+                .col-xs-12.invoice #{invoice.invoiceLabel} vom #{invoice.dateFormatted}
+        .row.white-small.company-info
+            .col-xs-12.component-title
+                | #{invoice.invoiceFromLabel}
+            .col-xs-12
+                | #{invoice.companyName}
+            .col-xs-12
+                | #{invoice.companyAddress1}
+            .col-xs-12
+                | #{invoice.companyAddress2}
+            .col-xs-12
+                | #{invoice.companyVAT}
+        .row.white-small
+            .col-xs-12.component-title
+                | #{invoice.invoiceToLabel}
+            .col-xs-12
+                | #{invoice.customer.company}
+            .col-xs-12
+                | #{invoice.customer.address}
+            .col-xs-12
+                | #{invoice.customer.postcode} #{invoice.customer.city}
+        .row.white-small
+            .col-xs-6
+            .col-xs-6.right
+                if invoice.status === 'paid'
+                    | #{invoice.paidOnLabel}:
+                if invoice.status !== 'paid'
+                    | #{invoice.dueOnLabel}:
+                |  #{invoice.dueDateFormatted}
+        .white-small
+            .row
+                .col-xs-10.component-title #{invoice.descriptionLabel}
+                .col-xs-2.component-title #{invoice.amountLabel}
+            each line in invoice.items
+                .row
+                    .col-xs-10.description #{line.description}
+                    .col-xs-2.description
+                        | #{line.amount}
+        .white-small.total-items
+            if invoice.subtotal
+                .row
+                    .col-xs-10  #{invoice.subTotalLabel}
+                    .col-xs-2
+                        | #{invoice.subtotal}
+                .row
+                    .col-xs-10
+                        | #{invoice.vatLabel} (#{invoice.taxPercent} %)
+                    .col-xs-2 #{invoice.tax}
+            .row
+                .col-xs-10 #{invoice.totalLabel}
+                .col-xs-2
+                    | #{invoice.total}

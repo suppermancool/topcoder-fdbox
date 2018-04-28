@@ -1,0 +1,118 @@
+[{
+  "_id": "58ece16cab623c6559e480e1",
+  "provider": "local",
+  "role": "admin",
+  "email": "admin@fbdox.com",
+  "password": "admin",
+  "company": "fbdox",
+  "fname": "Admin",
+  "lname": "FBDox",
+  "address": "Namibia",
+  "postcode": "GB6ckc",
+  "city": "Tonga",
+  "vatNumber": "wFrYA6nAERpLM5yiQZaH",
+  "preferences": {
+    "standardFontSize": "11px",
+    "standardFontName": "Helvetica"
+  }
+}, {
+  "_id": "58ece16cab623c6559e180e2",
+  "provider": "local",
+  "role": "user",
+  "email": "user@fbdox.com",
+  "password": "user",
+  "company": "fbdox",
+  "fname": "Nakisha",
+  "lname": "Therien",
+  "address": "Namibia",
+  "postcode": "GB6ckc",
+  "city": "Tonga",
+  "vatNumber": "wFrYA6nAERpLM5yiQZaH",
+  "preferences": {
+    "standardFontSize": "16px",
+    "standardFontName": "Helvetica"
+  },
+  "account": {
+    "stripeSource": "tok_visa"
+  }
+}, {
+  "_id": "58ece16cab623c6559e180e9",
+  "provider": "local",
+  "role": "user",
+  "email": "freeuser@fbdox.com",
+  "password": "user",
+  "company": "fbdox",
+  "fname": "Free",
+  "lname": "User",
+  "address": "Namibia",
+  "postcode": "GB6ckc",
+  "city": "Tonga",
+  "vatNumber": "wFrYA6nAERpLM5yiQZaH",
+  "preferences": {
+    "standardFontSize": "16px",
+    "standardFontName": "Helvetica"
+  },
+  "account": {
+    "billingDiscount": "freePLAN",
+    "stripeSource": "tok_visa"
+  }
+}, {
+  "_id": "58ece16cab623c6559e480e3",
+  "provider": "local",
+  "role": "enterprise",
+  "email": "enterprisefree@owner.com",
+  "password": "user",
+  "company": "fbdox",
+  "fname": "Enterprise",
+  "lname": "Free User",
+  "address": "Namibia",
+  "postcode": "GB6ckc",
+  "city": "Tonga",
+  "vatNumber": "wFrYA6nAERpLM5yiQZaH",
+  "preferences": {
+    "standardFontSize": "16px",
+    "standardFontName": "Helvetica"
+  },
+  "account": {
+    "billingDiscount": "freePLAN",
+    "stripeSource": "tok_visa"
+  }
+}, {
+  "_id": "58ece16cab623c6559e180e3",
+  "provider": "local",
+  "role": "enterprise",
+  "email": "enterprise@owner.com",
+  "password": "user",
+  "company": "fbdox",
+  "fname": "Enterprise",
+  "lname": "User",
+  "address": "Namibia",
+  "postcode": "GB6ckc",
+  "city": "Tonga",
+  "vatNumber": "wFrYA6nAERpLM5yiQZaH",
+  "preferences": {
+    "standardFontSize": "16px",
+    "standardFontName": "Helvetica"
+  },
+  "account": {
+    "stripeSource": "tok_visa"
+  }
+}, {
+  "_id": "58ece16cab623c6559e180e4",
+  "provider": "local",
+  "role": "enterprise-user",
+  "email": "enterprise@user.com",
+  "password": "user",
+  "enterprise": "58ece16cab623c6559e480e3",
+  "company": "fbdox",
+  "fname": "Mckenzie",
+  "lname": "Rene",
+  "address": "Namibia",
+  "postcode": "GB6ckc",
+  "city": "Tonga",
+  "vatNumber": "wFrYA6nAERpLM5yiQZaH",
+  "preferences": {
+    "standardFontSize": "12px",
+    "standardFontName": "Helvetica"
+  }
+}]

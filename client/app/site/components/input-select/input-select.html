@@ -1,0 +1,2 @@
+<label>{{$ctrl.label}} <i class="fa fa-info" ng-if="$ctrl.tooltip" uib-tooltip="{{$ctrl.tooltip}}"></i></label>
+<select class="form-control" name="{{$ctrl.name}}" ng-model="$ctrl.model" auto-scroll required ng-options="option.attrs.result1 as option.attrs.name for option in $ctrl.options" ng-change="$ctrl.onChange()"></select>

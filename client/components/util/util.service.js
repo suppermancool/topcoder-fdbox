@@ -1,0 +1,143 @@
+'use strict';
+
+import angular from 'angular';
+import _ from 'lodash';
+import ModalCtrl from '../../app/site/components/modals/modalCtrl';
+
+/**
+ * The Util service is for thin, globally reusable, utility functions
+ */
+export function UtilService($window, $injector) {
+  'ngInject';
+
+  let interviewProcess = false;
+  const Util = {
+    /**
+     * Return a callback or noop function
+     *
+     * @param  {Function|*} cb - a 'potential' function
+     * @return {Function}
+     */
+    safeCb(cb) {
+      return angular.isFunction(cb) ? cb : angular.noop;
+    },
+
+    /**
+     * Parse a given url with the use of an anchor element
+     *
+     * @param  {String} url - the url to parse
+     * @return {Object}     - the parsed url, anchor element
+     */
+    urlParse(url) {
+      let a = document.createElement('a');
+      a.href = url;
+
+      // Special treatment for IE, see http://stackoverflow.com/a/13405933 for details
+      if(a.host === '') {
+        a.href = a.href;
+      }
+
+      return a;
+    },
+
+    /**
+     * Test whether or not a given url is same origin
+     *
+     * @param  {String}           url       - url to test
+     * @param  {String|String[]}  [origins] - additional origins to test against
+     * @return {Boolean}                    - true if url is same origin
+     */
+    isSameOrigin(url, origins) {
+      url = Util.urlParse(url);
+      origins = origins && [].concat(origins) || [];
+      origins = origins.map(Util.urlParse);
+      origins.push($window.location);
+      origins = origins.filter(o => {
+        let hostnameCheck = url.hostname === o.hostname;
+        let protocolCheck = url.protocol === o.protocol;
+        // 2nd part of the special treatment for IE fix (see above):
+        // This part is when using well-known ports 80 or 443 with IE,
+        // when $window.location.port==='' instead of the real port number.
+        // Probably the same cause as this IE bug: https://goo.gl/J9hRta
+        let portCheck = url.port === o.port || o.port === '' && (url.port === '80' || url.port
+          === '443');
+        return hostnameCheck && protocolCheck && portCheck;
+      });
+      return origins.length >= 1;
+    },
+
+    /**
+     * set interviewProcessFlag
+     * @param process
+     */
+    setInterviewProcess(process) {
+      interviewProcess = process;
+    },
+
+    /**
+     * Check if interview process going
+     * @returns {boolean}
+     */
+    isInterviewProcess() {
+      return interviewProcess;
+    },
+
+    /**
+     * confirm before leaving interview process
+     */
+    confirmBackInInterviewProcess(...args) {
+      let $uibModal = $injector.get('$uibModal');
+      let $http = $injector.get('$http');
+      let $location = $injector.get('$location');
+      let Auth = $injector.get('Auth');
+      return $uibModal.open({
+        template: require('../../app/site/components/modals/confirm.html'),
+        controller: ModalCtrl,
+        controllerAs: '$ctrl',
+        windowClass: 'site-modal',
+        resolve: {
+          modalOpts: () => {}
+        }
+      }).result.then(res => {
+        if(res.confirm) {
+          const interview = args.shift() || false;
+          const logout = args.shift() || false;
+          if(_.isObject(interview)) {
+            interview.user = Auth.getCurrentUserSync().id;
+            if(interview._id) {
+              $http.put(`/api/interviews/${interview._id}`, interview)
+              .then(resp => {
+                console.log(resp);
+                if(logout) {
+                  interviewProcess = false;
+                  Auth.logout();
+                  $location.path('/');
+                }
+              })
+              .catch(e => {
+                console.error(e);
+              });
+            } else {
+              $http.post('/api/interviews', interview)
+              .then(resp => {
+                console.log(resp);
+                if(logout) {
+                  interviewProcess = false;
+                  Auth.logout();
+                  $location.path('/');
+                }
+              })
+              .catch(e => {
+                console.error(e);
+              });
+            }
+          }
+          interviewProcess = false;
+        }
+        return res.confirm;
+      }, _.noop);
+    }
+  };
+
+  return Util;
+}

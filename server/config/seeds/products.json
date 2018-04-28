@@ -1,0 +1,15 @@
+[{
+  "_id": "58ece16cab623c6559e480e9",
+  "identifier": "Prod1",
+  "title": "Product name lorem 1",
+  "description": "Lorem ipsum Incididunt deserunt sunt culpa.",
+  "category": "58ece16cab623c6559e48000",
+  "price": 299
+}, {
+  "_id": "58ece16cab623c6559e480ea",
+  "identifier": "Prod2",
+  "title": "Product name lorem 2",
+  "description": "Lorem ipsum Incididunt deserunt sunt culpa.",
+  "category": "58ece16cab623c6559e48001",
+  "price": 100
+}]

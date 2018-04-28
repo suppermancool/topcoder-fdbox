@@ -1,0 +1,23 @@
+<admin-layout>
+    <form name="$ctrl.cform" ng-submit="$ctrl.cform.$valid&&$ctrl.save($ctrl.message)" novalidate>
+      <div class="form-group" ng-class="{'has-error': $ctrl.cform.$submitted&&$ctrl.cform.text.$invalid}">
+        <label for="messageText">Message text</label>
+        <textarea name="text" class="form-control message-area" id="messageText" placeholder="Message text" ng-model="$ctrl.message.text" required ng-keyup="$ctrl.clearErrors('text')"></textarea>
+        <span class="help-block" ng-if="$ctrl.cform.$submitted&&$ctrl.cform.text.$error.required">Required</span>
+        <span class="help-block" ng-if="$ctrl.errors.text">{{$ctrl.errors.text}}</span>
+      </div>
+
+      <div class="form-group" ng-if="$ctrl.errors.onDelete">
+        <strong class="text-danger">{{$ctrl.errors.onDelete.message}}</strong>
+      </div>
+
+      <div class="form-group">
+        <a href="/admin/messages" class="btn btn-default" ng-click="$ctrl.onCancelEdits($event, $ctrl.message)">Cancel</a>
+        <button type="submit" class="btn btn-primary">
+          {{$ctrl.isNew($ctrl.message) ? 'Create' : 'Update'}}
+        </button>
+
+        <button type="button" class="btn btn-danger pull-right" ng-click="$ctrl.delete($ctrl.message)" ng-if="!$ctrl.isNew($ctrl.message)">Delete</button>
+      </div>
+    </form>
+  </admin-layout>

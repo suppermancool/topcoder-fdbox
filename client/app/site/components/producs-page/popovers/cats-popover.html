@@ -1,0 +1,21 @@
+<div class="cats-picker">
+  <div class="body">
+    <h1>{{'CAT_PICK_HINT' | translate}}:</h1>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="checkbox">
+          <input type="checkbox" id="cat-a" ng-model="$ctrl.allCatsFlag" ng-click="$ctrl.allCatsClick()" />
+          <label for="cat-a">{{'ALL' | translate}}</label>
+        </div>
+      </div>
+    </div>
+    <div class="row" data-ng-repeat="rowIndex in $ctrl.categoryRowIndices">
+      <div class="col-md-6" ng-repeat="cat in $ctrl.getCategoryForRow(rowIndex + 1) track by $index">
+        <div class="checkbox">
+          <input type="checkbox" id="cat-{{rowIndex}}-{{$index}}" name="selectedCats[]" value="{{cat.title}}" ng-model="cat.selected" ng-click="$ctrl.updateAllCatsFlag()" />
+          <label for="cat-{{rowIndex}}-{{$index}}">{{cat.title}}</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<div class="header">
+  <button class="btn btn-default btn-secondary" role="button" ng-click="$ctrl.stepBack()">{{'BACK' | translate}}</button>
+  <button class="btn btn-default" role="button" ng-click="$ctrl.stepNext()" ng-disabled="$ctrl.paymentProcessing">{{'CONFIRM' | translate}} <spinner ng-show="$ctrl.paymentProcessing"></spinner></button>
+</div>
+<div class="docs-preview">
+  <div class="doc" ng-repeat="doc in $ctrl.previewImageList track by $index">
+    <img ng-src="{{$ctrl.uploadPath + doc}}" />
+    <p>{{$index + 1}}</p>
+  </div>
+</div>
+</div>

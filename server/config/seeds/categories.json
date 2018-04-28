@@ -1,0 +1,25 @@
+[{
+  "_id": "58ece16cab623c6559e48000",
+  "title": "Governments",
+  "description": "Category description 1"
+}, {
+  "_id": "58ece16cab623c6559e48001",
+  "title": "Medicals",
+  "description": "Category description 2"
+}, {
+  "_id": "58ece16cab623c6559e48002",
+  "title": "Corporations",
+  "description": "Category description 3"
+}, {
+  "_id": "58ece16cab623c6559e48003",
+  "title": "Law firms",
+  "description": "Category description 4"
+}, {
+  "_id": "58ece16cab623c6559e48004",
+  "title": "Insurance",
+  "description": "Category description 5"
+}, {
+  "_id": "58ece16cab623c6559e48005",
+  "title": "Mining",
+  "description": "Category description 6"
+}]

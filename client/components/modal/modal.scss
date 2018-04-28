@@ -1,0 +1,29 @@
+.modal-primary,
+.modal-info,
+.modal-success,
+.modal-warning,
+.modal-danger {
+  .modal-header {
+    color: #fff;
+    .modal-title{
+      text-transform: uppercase;
+      text-align: center;
+      font-size: 22px;
+    }
+  }
+}
+.modal-primary .modal-header {
+  background: $brand-primary;
+}
+.modal-info .modal-header {
+  background: $brand-info;
+}
+.modal-success .modal-header {
+  background: $brand-success;
+}
+.modal-warning .modal-header {
+  background: $accent-color;
+}
+.modal-danger .modal-header {
+  background: $accent-color;
+}

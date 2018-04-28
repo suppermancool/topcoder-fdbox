@@ -1,0 +1,29 @@
+<admin-layout>
+  <form name="$ctrl.cform" ng-submit="$ctrl.cform.$valid&&$ctrl.save($ctrl.category)" novalidate>
+    <div class="form-group" ng-class="{'has-error': $ctrl.cform.$submitted&&$ctrl.cform.title.$invalid}">
+      <label for="categTitle">Category Title</label>
+      <input type="text" name="title" class="form-control" id="categTitle" placeholder="Product category title" ng-model="$ctrl.category.title" required ng-keyup="$ctrl.clearErrors('title')">
+      <span class="help-block" ng-if="$ctrl.cform.$submitted&&$ctrl.cform.title.$error.required">Required</span>
+      <span class="help-block" ng-if="$ctrl.errors.title">{{$ctrl.errors.title}}</span>
+    </div>
+    <div class="form-group" ng-class="{'has-error': $ctrl.cform.$submitted&&$ctrl.cform.description.$invalid}">
+      <label for="categDescription">Category Description</label>
+      <input type="text" name="description" class="form-control" id="categDescription" placeholder="Product category description" ng-model="$ctrl.category.description" required ng-keyup="$ctrl.clearErrors('description')">
+      <span class="help-block" ng-if="$ctrl.cform.$submitted&&$ctrl.cform.description.$error.required">Required</span>
+      <span class="help-block" ng-if="$ctrl.errors.description">{{$ctrl.errors.description}}</span>
+    </div>
+
+    <div class="form-group" ng-if="$ctrl.errors.onDelete">
+      <strong class="text-danger">{{$ctrl.errors.onDelete.message}}</strong>
+    </div>
+
+    <div class="form-group">
+      <a href="/admin/categories" class="btn btn-default" ng-click="$ctrl.onCancelEdits($event, $ctrl.category)">Cancel</a>
+      <button type="submit" class="btn btn-primary">
+        {{$ctrl.isNew($ctrl.category) ? 'Create' : 'Update'}}
+      </button>
+
+      <button type="button" class="btn btn-danger pull-right" ng-click="$ctrl.delete($ctrl.category)" ng-if="!$ctrl.isNew($ctrl.category)">Delete</button>
+    </div>
+  </form>
+</admin-layout>

@@ -1,0 +1,34 @@
+<form name="changePassForm" novalidate>
+  <div class="header">
+    <h2>{{'CHANGE_PASS' | translate}}</h2>
+    <button class="btn btn-default" role="button"
+       ng-class="{disabled: changePassForm.confirm.$error.pattern || changePassForm.$invalid}"
+       ng-click="$ctrl.updatePass()">{{'UPDATE' | translate}}</button>
+  </div>
+  <div class="row">
+    <div class="col-xs-6">
+      <div class="alert alert-danger" ng-show="$ctrl.passwordUpdateError">
+        {{'PASS_UPDATE_INCORRECT' | translate}}
+      </div>
+      <div class="alert alert-success" ng-show="$ctrl.passwordUpdated">
+        {{'PASS_UPDATED_ALERT' | translate}}
+      </div>
+      <div class="form-group">
+        <p class="label">{{'CURR_PASS' | translate}}</p>
+        <input type="password" class="form-control" ng-model="$ctrl.oldPassword" required>
+      </div>
+      <div class="alert alert-danger" ng-show="changePassForm.confirm.$error.pattern">
+        {{'PASS_MISMATCH' | translate}}
+      </div>
+      <div class="form-group" ng-class="{'has-error': changePassForm.confirm.$error.pattern}">
+        <p class="label">{{'NEW_PASS' | translate}}</p>
+        <input type="password" class="form-control" required ng-model="$ctrl.newPassword">
+      </div>
+      <div class="form-group" ng-class="{'has-error': changePassForm.confirm.$error.pattern}">
+        <p class="label">{{'CONFIRM_PASS' | translate}}</p>
+        <input type="password" class="form-control" required pattern="{{$ctrl.newPassword}}" name="confirm"
+               ng-model="$ctrl.confirmPassword">
+      </div>
+    </div>
+  </div>
+</form>

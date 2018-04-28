@@ -1,0 +1,20 @@
+<div class="modal-header">
+  <h3 class="modal-title">{{'RESET_TITLE' | translate}}</h3>
+</div>
+<div class="modal-body">
+  <div class="login-help-wrap">
+    <div class="line"></div>
+    <h3 class="login-help">{{'RESET_HELP' | translate}}</h3>
+    <div class="line"></div>
+  </div>
+  <div class="alert alert-danger text-center" ng-if="$ctrl.error">Ungültige E-Mail-Adresse.</div>
+  <form name="lF">
+    <div class="form-group">
+      <input type="email" name="email" class="form-control" ng-model="$ctrl.loginForm.email" placeholder="{{'EMAIL' | translate}}" required ng-keydown="$event.keyCode === 13 && $ctrl.resetPassword()" />
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-default btn-secondary" role="button" ng-click="$ctrl.modal.dismiss()">{{'CANCEL_BACK' | translate}}</button>
+  <button class="btn btn-default" role="button" ng-class="{disabled: lF.$invalid}" ng-click="$ctrl.resetPassword()">{{'SEND' | translate}}</button>
+</div>

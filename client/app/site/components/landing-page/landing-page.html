@@ -1,0 +1,146 @@
+<site-layout>
+  <div class="row welcome">
+    <h1>{{'WELCOME_H1' | translate}}</h1>
+    <div class="accent-divider"></div>
+    <h2>{{'WELCOME_H2' | translate}}</h2>
+    <button class="btn btn-default btn-call-action" ng-click="$ctrl.openProduct()" role="button">{{'GET_STARTED' | translate}}</button>
+  </div>
+  <div class="row what-is">
+    <div class="col-xs-6 what-is-img">
+      <img src="assets/images/what.png" />
+    </div>
+    <div class="col-xs-6">
+      <h1>{{'WHAT_IS' | translate}} FBDOX.at?</h1>
+      <div class="accent-divider"></div>
+      <p>&nbsp;</p>
+      <p>{{'WHAT_IS_P1' | translate}}</p>
+      <p>{{'WHAT_IS_P3' | translate}} <button class="desc-link" ng-click="$ctrl.openFaq()">{{'FAQ' | translate}}</button>.</p>
+    </div>
+  </div>
+  <div class="row how-it-works">
+    <h1>{{'HOW_WORKS_H1' | translate}}</h1>
+    <div class="accent-divider"></div>
+    <h2 class="font-18" translate>{{'HOW_WORKS_H2'}}</h2>
+    <div class="hw-list">
+      <div class="col-xs-6">
+        <ul>
+          <li><p class="info">{{'HOW_WORKS_BULLET_1' | translate}}</p></li>
+          <li><p class="info">{{'HOW_WORKS_BULLET_2' | translate}}</p></li>
+          <li><p class="info">{{'HOW_WORKS_BULLET_3' | translate}}</p></li>
+          <li><p class="info">{{'HOW_WORKS_BULLET_4' | translate}}</p></li>
+          <li><p class="info">{{'HOW_WORKS_BULLET_5' | translate}}</p></li>
+          <li><p class="info">{{'HOW_WORKS_BULLET_6' | translate}}</p></li>
+        </ul>
+      </div>
+      <div class="col-xs-6">
+        <ul>
+          <li><p class="info">{{'HOW_WORKS_BULLET_7' | translate}}</p></li>
+          <li><p class="info">{{'HOW_WORKS_BULLET_8' | translate}}</p></li>
+          <li><p class="info">{{'HOW_WORKS_BULLET_9' | translate}}</p></li>
+          <li><p class="info">{{'HOW_WORKS_BULLET_10' | translate}}</p></li>
+          <li><p class="info">{{'HOW_WORKS_BULLET_11' | translate}}</p></li>
+          <li><p class="info">{{'HOW_WORKS_BULLET_12' | translate}}</p></li>
+        </ul>
+      </div>
+    </div>
+    <p class="font-18">{{'HOW_WORKS_P1' | translate}}</p>
+    <div class="row steps">
+      <div class="col-xs-3 step">
+        <img src="assets/images/h1.png" />
+        <h3>{{'STEP' | translate}} 1</h3>
+        <p>{{'STEP1' | translate}}</p>
+      </div>
+      <div class="col-xs-3 step">
+        <img src="assets/images/h2.png" />
+        <h3>{{'STEP' | translate}} 2</h3>
+        <p>{{'STEP2' | translate}}</p>
+      </div>
+      <div class="col-xs-3 step">
+        <img src="assets/images/h3.png" />
+        <h3>{{'STEP' | translate}} 3</h3>
+        <p>{{'STEP3' | translate}}</p>
+      </div>
+      <div class="col-xs-3 step">
+        <img src="assets/images/h4.png" />
+        <h3>{{'STEP' | translate}} 4</h3>
+        <p>{{'STEP4' | translate}}</p>
+      </div>
+    </div>
+    <div class="row before-bottom">
+      <h2 class="font-18">{{'HOW_WORKS_BEFORE' | translate}}</h2>
+    </div>
+    <div class="bottom-text">
+      <img src="assets/images/icon-clock.png" />
+      <h2>{{'HOW_WORKS_BOT_TEXT' | translate}}</h2>
+    </div>
+    <div class="embed-video">
+      <iframe width="854" height="480" src="https://www.youtube.com/embed/tlTKTTt47WE?fs=0&loop=1&modestbranding=1&playsinline=1&showinfo=0&iv_load_policy=3&playlist=tlTKTTt47WE" frameborder="0" gesture="media" allow="encrypted-media"></iframe>
+    </div>
+  </div>
+  <div class="row product-infos">
+    <h1>{{'PRODUCT_INFO_H1' | translate}}</h1>
+    <div class="accent-divider"></div>
+    <h2 class="font-18">{{'PRODUCT_INFO_H2' | translate}}</h2>
+    <div class="slider-container">
+      <div uib-carousel class="slider-wrap" active="$ctrl.activeSlide" interval="$ctrl.slideInterval" no-pause=true>
+        <div uib-slide ng-repeat="slide in $ctrl.slides" index="$index">
+          <div class="slide" ng-class="{justify: slide.length === 4}">
+            <div class="product-card" ng-repeat="item in slide" ng-click="$ctrl.goTo(item)">
+              <img ng-src="{{item.img || 'assets/images/icon-goverments.png'}}" />
+              <h2>{{item.title}}</h2>
+              <p>{{item.description}}</p>
+              <p>{{item.productCount}} {{'PRODUCTS_CAMEL' | translate}}</p>
+              <img src="/assets/images/product-angle.png" class="corner" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="info">{{'PRODUCT_INFO_P' | translate}}</p>
+  </div>
+  <div class="row try-out">
+    <h1>{{'TRY_OUT_H1' | translate}}</h1>
+    <div class="accent-divider"></div>
+    <h2 class="font-18">{{'TRY_OUT_H2' | translate}}</h2>
+    <div class="try-list">
+    <ul>
+      <li><p class="info">{{'TRY_OUT_BULLET_1' | translate}}</p></li>
+      <li><p class="info">{{'TRY_OUT_BULLET_2' | translate}}</p></li>
+      <li><p class="info">{{'TRY_OUT_BULLET_3' | translate}}</p></li>
+      <li><p class="info">{{'TRY_OUT_BULLET_4' | translate}}</p></li>
+    </ul>
+    </div>
+  </div>
+  <div class="row testimonials">
+    <div class="testimonial-header">
+      <h1>{{'TESTIMONIAL_H1' | translate}}</h1>
+      <div class="accent-divider"></div>
+    </div>
+    <div class="flex-container">
+    <div class="col-flex">
+      <p class="testimonial">{{'TESTIMONIAL_1' | translate}} <span>(<span class="testimonial-author">{{'TESTIMONIAL_1_AUTHOR' | translate}}</span>)</span></p>
+      <p class="testimonial">{{'TESTIMONIAL_2' | translate}} <span>(<span class="testimonial-author">{{'TESTIMONIAL_2_AUTHOR' | translate}}</span>)</span></p>
+      <p class="testimonial">{{'TESTIMONIAL_3' | translate}} <span>(<span class="testimonial-author">{{'TESTIMONIAL_3_AUTHOR' | translate}}</span>)</span></p>
+      <p class="testimonial">{{'TESTIMONIAL_4' | translate}} <span>(<span class="testimonial-author">{{'TESTIMONIAL_4_AUTHOR' | translate}}</span>)</span></p>
+    </div>
+    <div class="col-flex testimonial-img">
+      <div class="img-container">
+        <img src="assets/images/testimonials-img.jpg" />
+      </div>
+    </div>
+    </div>
+  </div>
+  <div class="row prices-section">
+    <div class="prices-text">
+      <p>
+        <span class="price">&euro;{{$ctrl.monthlyFee}}</span> {{'PRICES_TEXT1' | translate}}
+      </p>
+      <p>
+        {{'PRICES_TEXT2' | translate}} <span class="price">&euro;{{$ctrl.purchaseFee}}</span> {{'PRICES_TEXT3' | translate}}
+      </p>
+    </div>
+    <div class="prices-btn">
+      <button class="btn btn-default btn-call-action" ng-click="$ctrl.openProduct()" role="button">{{'GET_STARTED' | translate}}</button>
+    </div>
+  </div>
+</site-layout>

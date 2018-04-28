@@ -1,0 +1,28 @@
+<div class="header">
+  <h2>{{'MANAGE_ACC' | translate}}</h2>
+  <button class="btn btn-default" role="button" ng-click="$ctrl.createUpdateAccount()">{{'CREATE_ACC' | translate}}</button>
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th ng-click="$ctrl.sortBy('fname')">{{'FNAME' | translate}} <span ng-class="{active: $ctrl.sortPropertyName === 'fname' }">{{$ctrl.sortReverse == false ? '&dtrif;' : '&utrif;'}}</span></th>
+      <th ng-click="$ctrl.sortBy('lname')">{{'LNAME' | translate}} <span ng-class="{active: $ctrl.sortPropertyName === 'lname' }">{{$ctrl.sortReverse == false ? '&dtrif;' : '&utrif;'}}</span></th>
+      <th ng-click="$ctrl.sortBy('email')">{{'EMAIL' | translate}} <span ng-class="{active: $ctrl.sortPropertyName === 'email' }">{{$ctrl.sortReverse == false ? '&dtrif;' : '&utrif;'}}</span></th>
+      <th class="text-center" ng-click="$ctrl.sortBy('date')">{{'CREATE_DATE' | translate}} <span ng-class="{active: $ctrl.sortPropertyName === 'date' }">{{$ctrl.sortReverse == false ? '&dtrif;' : '&utrif;'}}</span></th>
+      <th class="text-center">{{'ACTION' | translate}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="row in $ctrl.accounts | startFrom:($ctrl.paginationPageNumm-1)*$ctrl.paginationPageSize | limitTo:$ctrl.paginationPageSize | orderBy:$ctrl.sortPropertyName:$ctrl.sortReverse">
+      <td>{{row.fname}}</td>
+      <td>{{row.lname}}</td>
+      <td>{{row.email}}</td>
+      <td class="text-center">{{row.createdAt | date:'dd.MM.yyyy'}}</td>
+      <td class="actions">
+        <button class="btn btn-accent btn-delete" role="button" ng-click="$ctrl.deleteAccount(row)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+        <button class="btn btn-default btn-edit" role="button" ng-click="$ctrl.createUpdateAccount(row)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<ul ng-if="$ctrl.accounts.length" uib-pagination total-items="$ctrl.accounts.length" ng-model="$ctrl.paginationPageNumm" max-size="5" items-per-page="$ctrl.paginationPageSize" class="pagination-sm pull-right" boundary-links="false" previous-text="&ltrif;" next-text="&rtrif;"></ul>

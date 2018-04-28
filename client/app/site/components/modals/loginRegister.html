@@ -1,0 +1,114 @@
+<div ng-if="!$ctrl.modalSwitchToggle">
+  <div class="modal-header">
+    <h3 class="modal-title">{{'LOGIN_TITLE' | translate}}</h3>
+  </div>
+  <div class="modal-body">
+    <div class="login-help-wrap">
+      <div class="line"></div>
+      <h3 class="login-help">{{'LOGIN_HELP' | translate}}</h3>
+      <div class="line"></div>
+    </div>
+    <div class="alert alert-danger text-center" ng-if="$ctrl.error">Ungültige E-Mail-Adresse oder ungültiges Passwort.</div>
+    <form name="lF">
+      <div class="form-group">
+        <input type="email" name="email" class="form-control" ng-model="$ctrl.loginForm.email" placeholder="{{'EMAIL' | translate}}" required ng-keydown="$event.keyCode === 13 && $ctrl.login()" autofocus />
+      </div>
+      <div class="form-group">
+        <input type="password" name="password" class="form-control" ng-model="$ctrl.loginForm.password" placeholder="{{'PASSWORD' | translate}}" required ng-keydown="$event.keyCode === 13 && $ctrl.login()" />
+      </div>
+      <button type="button" class="pull-right button-link" ng-click="$ctrl.resetPopup()">{{'FORGOT' | translate}}</button>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <p class="pull-left">{{'REGISTER_ASK' | translate}} <button type="button" class="button-link" ng-click="$ctrl.toggleModals()">{{'REGISTER' | translate}}</button></p>
+    <button type="button" class="btn btn-default btn-secondary" role="button" ng-click="$ctrl.modal.dismiss()">{{'CANCEL_BACK' | translate}}</button>
+    <button class="btn btn-default" role="button" ng-class="{disabled: lF.$invalid}" ng-click="$ctrl.login()">{{'LOGIN' | translate}}</button>
+  </div>
+</div>
+<div ng-if="$ctrl.modalSwitchToggle">
+  <div class="modal-header">
+    <h3 class="modal-title">{{'REGISTER_TITLE' | translate}}</h3>
+  </div>
+  <div class="modal-body">
+    <form name="rF" id="rF" ng-submit="$ctrl.checkSubmit(regForm1, regForm2)">
+    <div class="horizontal-collapse" uib-collapse="$ctrl.regPayment" horizontal>
+      <ng-form name="regForm1" ng-keypress="$ctrl.checkContinue($event, regForm1)">
+      <div class="login-help-wrap no-margin">
+        <div class="line"></div>
+        <h3 class="login-help">{{'REGISTER_HELP' | translate}}</h3>
+        <div class="line"></div>
+      </div>
+      <div class="alert alert-danger text-center" ng-if="$ctrl.error">{{'EMAIL_EXIST' | translate}}</div>
+        <div class="form-group">
+          <input type="text" name="company" class="form-control" ng-model="$ctrl.registerForm.company" placeholder="{{'COMPANY_NAME' | translate}}" required autofocus />
+        </div>
+        <div class="row form-group">
+          <div class="col-xs-6">
+            <input type="text" name="fname" class="form-control" ng-model="$ctrl.registerForm.fname" placeholder="{{'FNAME' | translate}}" required />
+          </div>
+          <div class="col-xs-6">
+            <input type="text" name="lname" class="form-control" ng-model="$ctrl.registerForm.lname" placeholder="{{'LNAME' | translate}}" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="text" name="address" class="form-control" ng-model="$ctrl.registerForm.address" placeholder="{{'ADDRESS' | translate}}" required />
+        </div>
+        <div class="row form-group">
+          <div class="col-xs-6">
+            <input type="text" name="postcode" class="form-control" ng-model="$ctrl.registerForm.postcode" placeholder="{{'POSTCODE' | translate}}" required />
+          </div>
+          <div class="col-xs-6">
+            <input type="text" name="city" class="form-control" ng-model="$ctrl.registerForm.city" placeholder="{{'CITY' | translate}}" required />
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class="col-xs-6">
+            <input type="email" name="email" class="form-control" ng-model="$ctrl.registerForm.email" placeholder="{{'EMAIL' | translate}}" required />
+          </div>
+          <div class="col-xs-6">
+            <input type="password" name="password" class="form-control" ng-model="$ctrl.registerForm.password" placeholder="{{'PASSWORD' | translate}}" required />
+          </div>
+        </div>
+        </ng-form>
+    </div>
+    <div class="horizontal-collapse" uib-collapse="!$ctrl.regPayment" horizontal>
+        <div class="login-help-wrap no-margin">
+          <div class="line"></div>
+          <h3 class="login-help">{{'PAYMENT_METHOD' | translate}}</h3>
+          <div class="line"></div>
+        </div>
+        <ng-form name="stripePayment">
+            <div class="form-group">
+              <div class="alert alert-success" ng-show="$ctrl.stripeSuccess">
+                {{'PAYMENT_SUCCESS' | translate}}
+              </div>
+              <!-- Used to display form errors -->
+              <div id="card-errors" class="alert alert-danger text-center" ng-show="$ctrl.stripeError" role="alert">{{$ctrl.errorMsg}}</div>
+            </div>
+            <div ng-hide="$ctrl.stripeSuccess">
+            <div class="form-group">
+              <div stripe-elements id="card-element" stripe="$ctrl.stripe" postal-code="$ctrl.registerForm.postcode" on-change="$ctrl.setOutcome(event)" callback="$ctrl.register()">
+                <!-- a Stripe Element will be inserted here. -->
+              </div>
+            </div>
+            </div>
+        </ng-form>
+        <p>&nbsp;</p>
+        <ng-form name="regForm2">
+        <div class="checkbox pull-left">
+          <input type="checkbox" id="accept" ng-model="$ctrl.registerForm.accept" required/>
+          <label for="accept">{{'ACCEPT' | translate}} <button type="button" class="button-link" ng-click="$ctrl.openTermInRegister()">{{'TERMS_LINK' | translate}}</button> {{'EXPLANATION' | translate}} <button type="button" class="button-link" ng-click="$ctrl.openPrivacyInRegister()">{{'PRIVACY_POLICY' | translate}}</button></label>
+        </div>
+        </ng-form>
+      </div>
+    </form>
+    </div>
+    <div class="modal-footer">
+      <p class="pull-left">{{'HAVE_ACCOUNT' | translate}} <button type="button" class="button-link" ng-click="$ctrl.toggleModals()">{{'LOGIN' | translate}}</button></p>
+      <button type="button" ng-if="!$ctrl.regPayment" class="btn btn-default btn-secondary" role="button" ng-click="$ctrl.modal.dismiss()">{{'CANCEL_BACK' | translate}}</button>
+      <button ng-if="!$ctrl.regPayment" class="btn btn-default" role="button" ng-class="{disabled: regForm1.$invalid}" ng-click="$ctrl.regPayment = true">{{'CONTINUE' | translate}}</button>
+
+      <button type="button" ng-if="$ctrl.regPayment" class="btn btn-default btn-secondary" role="button" ng-click="$ctrl.regPayment = false">{{'CANCEL' | translate}}</button>
+      <button ng-if="$ctrl.regPayment" class="btn btn-default" role="button" ng-class="{disabled: regForm1.$invalid || regForm2.$invalid || $ctrl.registering || (!$ctrl.stripeCardIsValid && !$ctrl.stripeSuccess) || $ctrl.stripeProcessing}" ng-click="$ctrl.submitCard()">{{'REGISTER' | translate}} <spinner ng-show="$ctrl.registering || $ctrl.stripeProcessing"></spinner></button>
+    </div>
+</div>

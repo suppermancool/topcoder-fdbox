@@ -1,0 +1,39 @@
+<div class="filters">
+  <p>{{'SHOW' | translate}} <strong>{{($ctrl.paginationPageNumm-1)*$ctrl.paginationPageSize+($ctrl.filteredProducts.length == 0 ? 0 : 1)}} - {{($ctrl.paginationPageNumm-1)*$ctrl.paginationPageSize + $ctrl.filteredProducts.length}}</strong> {{'OF' | translate}} <strong>{{($ctrl.products | catsFilter:$ctrl.cats | filter:$ctrl.byQ.bind($ctrl)).length}}</strong></p>
+  <div class="input-group">
+    <input type="text" class="form-control" ng-model="$ctrl.q" auto-focus>
+    <span class="input-group-addon" ng-click="$ctrl.clearSearchText()"><i class="fa fa-times search-icon"></i></span>
+  </div>
+  <button
+    uib-popover-template="'producs-page/popovers/cats-popover.html'"
+    popover-placement="bottom-right"
+    popover-trigger="'outsideClick'"
+    type="button"
+    class="btn btn-default btn-secondary"
+  >
+    <img src="assets/images/icon-filter-all-active.png" ng-if="$ctrl.allCatsFlag"/>
+    <img src="assets/images/icon-filter-some-active.png" ng-if="!$ctrl.allCatsFlag"/>
+    {{'CATEGORIES' | translate}}
+  </button>
+</div>
+<table class="table products">
+  <thead>
+    <tr>
+      <th ng-click="$ctrl.sortBy('description')">{{'BRIEF_DESC' | translate}} <span ng-class="{active: $ctrl.sortPropertyName === 'description' }">{{$ctrl.sortReverse == false ? '&dtrif;' : '&utrif;'}}</span></th>
+      <th class="text-center" ng-click="$ctrl.sortBy('category.title')">{{'CATEGORY' | translate}}<span ng-class="{active: $ctrl.sortPropertyName === 'category.title' }">{{$ctrl.sortReverse == false ? '&dtrif;' : '&utrif;'}}</span></th>
+      <th ng-click="$ctrl.sortBy('title')">{{'TITLE' | translate}} <span ng-class="{active: $ctrl.sortPropertyName === 'title' }">{{$ctrl.sortReverse == false ? '&dtrif;' : '&utrif;'}}</span></th>
+      <th class="text-center">{{'ACTION' | translate}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="row in ($ctrl.filteredProducts= ($ctrl.products | catsFilter:$ctrl.cats | filter:$ctrl.byQ.bind($ctrl) |orderBy:$ctrl.sortPropertyName:$ctrl.sortReverse:$ctrl.localeSensitiveComparator | startFrom:($ctrl.paginationPageNumm-1)*$ctrl.paginationPageSize | limitTo:$ctrl.paginationPageSize))">
+      <td>{{row.description}}</td>
+      <td class="text-center">{{row.category.title}}</td>
+      <td>{{row.title}}</td>
+      <td class="text-center">
+        <button class="btn btn-default btn-select" role="button" ng-click="$ctrl.selectProduct(row)">{{'SELECT' | translate}}</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<ul uib-pagination total-items="($ctrl.products | catsFilter:$ctrl.cats | filter:$ctrl.byQ.bind($ctrl)).length" ng-model="$ctrl.paginationPageNumm" max-size="5" items-per-page="$ctrl.paginationPageSize" class="pagination-sm pull-right" boundary-links="false" previous-text="&ltrif;" next-text="&rtrif;"></ul>

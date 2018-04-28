@@ -1,0 +1,24 @@
+<div class="header no-button-tab">
+  <h2>{{'DOWNLOAD_INV' | translate}}</h2>
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th ng-click="$ctrl.sortBy('username')">{{'USERNAME' | translate}} <span ng-class="{active: $ctrl.sortPropertyName === 'username' }">{{$ctrl.sortReverse == false ? '&dtrif;' : '&utrif;'}}</span></th>
+      <th ng-click="$ctrl.sortBy('title')">{{'PROD_TITLE' | translate}} <span ng-class="{active: $ctrl.sortPropertyName === 'title' }">{{$ctrl.sortReverse == false ? '&dtrif;' : '&utrif;'}}</span></th>
+      <th class="text-center" ng-click="$ctrl.sortBy('date')">{{'DATE_OF_PUR' | translate}} <span ng-class="{active: $ctrl.sortPropertyName === 'date' }">{{$ctrl.sortReverse == false ? '&dtrif;' : '&utrif;'}}</span></th>
+      <th class="text-center">{{'ACTION' | translate}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="row in $ctrl.invoices | startFrom:($ctrl.paginationPageNumm-1)*$ctrl.paginationPageSize | limitTo:$ctrl.paginationPageSize | orderBy:$ctrl.sortPropertyName:$ctrl.sortReverse">
+      <td>{{row.username}}</td>
+      <td>{{row.title}}</td>
+      <td class="text-center">{{row.date | date : 'd.M.yyyy'}}</td>
+      <td class="text-center">
+          <button class="btn btn-default" role="button" ng-click="$ctrl.downloadInvoice(row.id, row.type, $index)" ng-disabled="$ctrl.generatingPDF[$index]"><i class="fa fa-download" aria-hidden="true"></i> {{'DOWNLOAD' | translate}}<spinner ng-show="$ctrl.generatingPDF[$index]"></spinner></button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<ul uib-pagination total-items="$ctrl.invoices.length" ng-model="$ctrl.paginationPageNumm" max-size="5" items-per-page="$ctrl.paginationPageSize" class="pagination-sm pull-right" boundary-links="false" previous-text="&ltrif;" next-text="&rtrif;"></ul>

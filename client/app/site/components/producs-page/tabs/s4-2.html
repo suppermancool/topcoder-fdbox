@@ -1,0 +1,24 @@
+<div class="header">
+  <h2></h2>
+  <button class="btn btn-default" ng-click="$ctrl.goTo('/api/finalprods/' + $ctrl.docs.finalProductId, '_blank')" role="button" ><i class="fa fa-envelope" aria-hidden="true"></i> {{'EMAIL_ALL' | translate}}</button>
+  <button class="btn btn-default" ng-click="$ctrl.goTo($ctrl.uploadPath + $ctrl.docs.downloadAllUrl, '_blank')" role="button"><i class="fa fa-download" aria-hidden="true"></i> {{'DOWNLOAD_ALL' | translate}}</button>
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th class="col-xs-5">{{'TITLE_DOC' | translate}}</th>
+      <th class="col-xs-5 ">{{'NUMM_PAGES' | translate}}</th>
+      <th class="text-center">{{'ACTION' | translate}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="row in $ctrl.docs.documents track by $index">
+      <td class="col-xs-5">{{row.title}}</td>
+      <td class="col-xs-5">{{row.numOfPages}}</td>
+      <td class="text-center">
+        <button class="btn btn-default" ng-click="$ctrl.goTo($ctrl.uploadPath + row.downloadUrl, '_blank')" role="button"><i class="fa fa-download" aria-hidden="true"></i> {{'DOWNLOAD' | translate}}</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<ul uib-pagination total-items="($ctrl.docs.documents).length" ng-model="$ctrl.paginationPageNumm" max-size="5" items-per-page="$ctrl.paginationPageSize" class="pagination-sm pull-right" boundary-links="false" previous-text="&ltrif;" next-text="&rtrif;"></ul>

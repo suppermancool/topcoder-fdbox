@@ -1,0 +1,14 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{'CONFIRM_TITLE' | translate}}</h3>
+  </div>
+  <div class="modal-body">
+    <div class="login-help-wrap">
+      <div class="line"></div>
+      <h3 class="login-help" translate>{{'CONFIRM_TEXT'}}</h3>
+      <div class="line"></div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-default btn-secondary" role="button" ng-click="$ctrl.modal.close({confirm: false})">{{'CANCEL_BACK' | translate}}</button>
+    <button class="btn btn-default" role="button" ng-click="$ctrl.modal.close({confirm: true})">{{'OK' | translate}}</button>
+  </div>

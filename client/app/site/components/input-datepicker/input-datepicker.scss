@@ -1,0 +1,19 @@
+.form-group .input-group .input-group-focus {
+  border-color: #66afe9;
+}
+
+.form-group .input-group .input-group-btn button {
+  outline: none;
+}
+
+.form-group .input-group .input-group-btn button:active {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+
+.has-error .input-group .input-group-btn {
+  border-color: #a94442;
+  border-bottom-right-radius: 2px;
+  border-top-right-radius: 2px;
+}

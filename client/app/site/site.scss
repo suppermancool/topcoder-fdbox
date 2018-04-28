@@ -1,0 +1,227 @@
+
+site-layout {
+  display: block;
+  background-color: $primary-text-color;
+  color: $primary-text-color;
+  font-family: HelveticaNeueLight;
+  font-size: 14px;
+  line-height: 1.2;
+
+  .container {
+    background-color: $container-color;
+  }
+
+  .browserupgrade {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+  }
+
+  img {
+    border: none;
+  }
+
+  a {
+    border: none;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  .container {
+    width: 1280px;
+    padding: 0;
+
+    .row.what-is, .row.how-it-works, .row.product-infos{
+      height: auto;
+    }
+
+    .row {
+      margin: 0;
+    }
+  }
+
+  .pagination {
+    >.disabled>span,
+    >.disabled>span:hover,
+    >.disabled>span:focus,
+    >.disabled>a,
+    >.disabled>a:hover,
+    >.disabled>a:focus {
+      display: none;
+    }
+    li.pagination-next, li.pagination-prev {
+      a {
+        background-color: $dark-primary-color;
+        color: $text-icons-color;
+        border: none;
+        border-radius: 3px;
+        font-size: 8px;
+        line-height: 18px;
+      }
+    }
+    >li>a, >li>span {
+      padding: 0px 6px;
+      margin-left: 5px;
+      border: none;
+      color: $primary-color;
+      font-weight: bold;
+    }
+    >.active>span,
+    >.active>span:hover,
+    >.active>span:focus,
+    >.active>a,
+    >.active>a:hover,
+    >.active>a:focus {
+      background-color: $primary-text-color;
+      color: $text-icons-color;
+      border: none;
+      border-radius: 3px;
+    }
+  }
+  .table {
+    border-spacing: 0 4px;
+    border-collapse: separate;
+    thead {
+      background-color: $primary-text-color;
+      tr {
+        th {
+          color: $text-icons-color;
+          padding: 15px 20px;
+          span {
+            cursor: pointer;
+            color: $secondary-text-color;
+            margin-left: 5px;
+            &.active {
+              color: $accent-color;
+            }
+          }
+        }
+      }
+    }
+    tbody {
+      tr {
+        &:nth-child(odd) {
+          background-color: $container-color;
+        }
+        &:nth-child(even) {
+          background-color: darken($container-color, 5%);
+        }
+        td {
+          height: 56px;
+          padding: 13px 0 13px 20px;
+          border-top: none;
+          vertical-align: middle;
+          &.text-center {
+            padding: 13px 20px 13px 20px;
+          }
+          &.interview-actions {
+            width: 250px;
+          }
+          .btn {
+            padding: 6px 25px;
+            font-size: 15px;
+            spinner {
+              position: absolute;
+              display: inline-block;
+              vertical-align: middle;
+              padding-top: 1px;
+              .spinner {
+                top: 0;
+              }
+            }
+          }
+          &.actions {
+            text-align: center;
+            .btn {
+              padding: 3px 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .date-picker {
+    #title {
+      margin: 15px 0;
+      font-family: HelveticaNeueMedium;
+      font-size: 16px;
+    }
+    #close {
+      color: #cccccc;
+      margin-top: 18px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .uib-daypicker{
+      outline: none;
+    }
+    table {
+      height: 266px;
+      width: 291px;
+      border-top: 1px solid #c8c8c8;
+      thead {
+        small {
+          text-transform: uppercase;
+          font-size: 12px;
+          font-family: HelveticaNeueCondensedBold;
+        }
+      }
+      .btn {
+        background-color: transparent;
+        padding: 10px 8px;
+        color: $primary-text-color;
+        border: none;
+        font-family: HelveticaNeue;
+        font-size: 15px;
+        &.active.btn-sm {
+          box-shadow: none;
+          background-color: $dark-primary-color;
+          border-radius: 50%;
+          border: none;
+          color: $text-icons-color;
+          .text-info {
+            color: $text-icons-color;
+          }
+        }
+        &.uib-title {
+          font-size: 17px;
+          color: $dark-primary-color;
+          text-transform: uppercase;
+          strong {
+            font-weight: normal;
+          }
+        }
+        &.uib-left {
+          padding-left: 0;
+          color: $dark-primary-color;
+        }
+        &.uib-right {
+          padding-right: 0;
+          color: $dark-primary-color;
+        }
+      }
+    }
+  }
+  .popover.bottom {
+    margin-top: 14px;
+    border: none;
+    border-radius: 0;
+    box-shadow: 0 5px 50px rgba(0,0,0,0.2);
+    max-width: 362px;
+    .arrow {
+      border-bottom-color: transparent;
+    }
+  }
+
+  #close{
+    height: 11px;
+    width: 11px;
+    background: url(/assets/images/cross.png) no-repeat rgba(221,221,221,0) !important;
+  }
+
+  select {
+    background: url(/assets/images/select-arw.png) 96.5% center no-repeat rgba(221,221,221,0) !important;
+  }
+}

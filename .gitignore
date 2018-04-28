@@ -1,0 +1,7 @@
+node_modules/
+dist/
+products/
+.DS_Store
+.vscode/
+npm-debug.log
+client/index.html

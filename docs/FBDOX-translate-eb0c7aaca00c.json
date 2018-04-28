@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "erudite-variety-188516",
+  "private_key_id": "eb0c7aaca00c7ded3fe1bf1cf13671574675d84b",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCMEtP0jSjBNVnJ\nhBvYedoQuu+jySGZnGoysygbtIj1ZXyWNhFWUIzQ5qCYSJ8v1x71rnkYFzXZf15e\nZ+srE6TQWsEAMROiY34gdcXvqQghqW5XRhWuZWYW9nRcCx9gB4HYE7YRkcGiL1ZP\nDbK8qrBH5SS0sxjV1nAiIdWPZKTZFKB0ygFvLbrjv/ynbS/SnIYHfW8jP5VIbrrJ\nb1WtZU7fdL+OC8he0uSiIDMuay3Ze/Iw4Sl4OaAELQ73Dn3r28hlUR6Fw7TPFcbN\n2tp1YTD8FK87Dx6yj8KUiQjnSivOIg1EXqGaLhAyZ+B5ki2y5z0DSJTIFCg1vKvo\nG0Gn3WPpAgMBAAECggEADSRzGJ3p9f7QdtTbW/tK14kClQZ5DZWcbTdcCwVsWEH2\nZ42ZINUb8TnCVadysCVp9TkyiW0cE1UdAJSVfwwvyZDKTP9NzU2yds82DB968NWZ\n0bx0qlE/O+ZR0pUEk5kAuMpYqdtYJKR2X6J0Y7lMIuLAB+hJ6z5cdQdhpzuVL/zY\n7FQOmvZObfkvaBAZ7thKuTvzJP2ENRM8PAePUYDZ+7o4q6s2csSkU/dpDluqDvVJ\nT8DRaO6Ix26Hd3TaKM9oIp1AVyFUOWtUGQ8RKi4Jiw7Q6v25sqfhXaH76qZkuYSV\nNUqTgT+6HgiiqzHzxtwj3STtjApXTCl6ei2F1oxR0QKBgQC9zxsbRl49h1H2TNfO\nhl0Hqa39g62GB15rUV35CyucjmehfXU77M+ZmTXwkFitr/8emOOB9smUkOZDn/bX\nPcSEjy7ILQV9/jqfZTrkGDIu6ciRE9GMCp8bOqaAgipwRfnoN32zXimN3Llwabo1\nW0Ke0YvXOv50jSpwFKoKXbUnTQKBgQC866syThNVtwnsfVNkbCvHE7eyiAU/0KMC\n79qZqiuQEgK7+4bZIj2d29ZxLC02J5mKvBTA9CNpKsfxhKAZBInh36bl4W/uArWJ\nuq0b6A/rgKag42TYdVUHiwnlAGa+Ez046hUlh7JE5QiLIVhd5H1+n/Kq8UyvRB7i\nXxQf2PN5DQKBgFlwGoS6nrN9bQiS4umk9Hck5CBeCMjr9fi5qX8tXUpy66/zruci\nyhvFTt5hFfgZwywGvMVDpW7E7EuXN7fqmgwgb9nRJRJeVf8/swVBxXvHm0OJRCcp\n5hjthQFu1FJ9FqnuY+O+DfSTuimXGDAGJZkygiNT4AzJa+LOSeWCjFbNAoGBAIlu\n+C+0VKR6b6G22j+n4YEFexFJmmf+I1gznNdE0EQSliKirEqxehmon6vc81b+H9ip\nUn+8GzaahLHSRZVtk9DZntSE16RSHDaBswUmIM613IIWanp9gMnn/960GAoWfOc2\ngwO2X5128Gwmad6EJjdDrIlm2N53s/ACMuWoMhbRAoGBAJif48DGCSkiuL7JkglS\nC2TXlQEJEk10dvAtBdlEi5J1McKFD1yvShr+V6232/ecaoaj4uFpCCwC4k7wbZaG\nBY245z3Yk34FSzFL7yEE6/FGdLoqx258dKq22YeFoAKSMROaAuDzRF+zWLDwimRp\npVmUtuNKHE4+NqB39PBlBFXx\n-----END PRIVATE KEY-----\n",
+  "client_email": "service-account@erudite-variety-188516.iam.gserviceaccount.com",
+  "client_id": "102520702499032867296",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/service-account%40erudite-variety-188516.iam.gserviceaccount.com"
+}

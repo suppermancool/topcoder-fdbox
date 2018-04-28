@@ -1,0 +1,71 @@
+<div class="acc-info">
+  <div class="header">
+    <h2>{{$ctrl.accountInfo.role !== $ctrl.constants.ENTERPRISE_USER ? 'ACC_INFO' : 'ACC_INFO_ENT_USER' | translate}}</h2>
+    <button class="btn btn-default" ng-if="$ctrl.accountInfo.role && $ctrl.accountInfo.role !== $ctrl.constants.ENTERPRISE_USER" ng-click="$ctrl.saveAccountUpdates()">
+      {{'UPDATE' | translate}}
+    </button>
+  </div>
+  <div class="row">
+    <div class="alert alert-success" ng-show="$ctrl.profileUpdateOK">
+      {{'PROFILE_UPDATED_ALERT' | translate}}
+    </div>
+    <div class="alert alert-danger" ng-show="$ctrl.profileUpdateError">
+      {{$ctrl.profileUpdateError}}
+    </div>
+    <div class="col-xs-6">
+      <div class="form-group">
+        <p class="label">{{'COMPANY_NAME' | translate}}</p>
+        <input type="text" tabindex="1" name="company" ng-disabled="$ctrl.accountInfo.role === $ctrl.constants.ENTERPRISE_USER" class="form-control" ng-model="$ctrl.accountInfo.company" placeholder="{{'COMPANY_NAME' | translate}}" required>
+      </div>
+      <div class="form-group">
+        <p class="label">{{'FNAME' | translate}}</p>
+        <input type="text" tabindex="2" name="fname" class="form-control" ng-disabled="$ctrl.accountInfo.role === $ctrl.constants.ENTERPRISE_USER" ng-model="$ctrl.accountInfo.fname" placeholder="{{'FNAME' | translate}}" required>
+      </div>
+      <div class="form-group">
+          <p class="label">{{'ADDRESS' | translate}}</p>
+          <input type="text" tabindex="4" name="address" class="form-control" ng-disabled="$ctrl.accountInfo.role === $ctrl.constants.ENTERPRISE_USER" ng-model="$ctrl.accountInfo.address" placeholder="{{'ADDRESS' | translate}}" required>
+      </div>
+      <div class="form-group">
+        <p class="label">{{'POSTCODE' | translate}}</p>
+        <input type="text" tabindex="5" name="postcode" class="form-control" ng-disabled="$ctrl.accountInfo.role === $ctrl.constants.ENTERPRISE_USER" ng-model="$ctrl.accountInfo.postcode" placeholder="{{'POSTCODE' | translate}}" required>
+      </div>
+      <div class="form-group">
+        <p class="label">{{'EMAIL' | translate}}</p>
+        <input type="text" tabindex="7" name="email" class="form-control" ng-disabled="$ctrl.accountInfo.role === $ctrl.constants.ENTERPRISE_USER" ng-model="$ctrl.accountInfo.email" placeholder="{{'EMAIL' | translate}}" required>
+      </div>
+      <div class="form-group">
+        <p class="label">{{'SFONT_NAME' | translate}}</p>
+        <select  tabindex="8" class="form-control" ng-disabled="$ctrl.accountInfo.role === $ctrl.constants.ENTERPRISE_USER" ng-model="$ctrl.accountInfo.preferences.standardFontName" required>
+          <option value="Arial">Arial</option>
+          <option value="Arial Black">Arial Black</option>
+          <option value="Courier New">Courier New</option>
+          <option value="Georgia">Georgia</option>
+          <option value="Times New Roman">Times New Roman</option>
+          <option value="Trebuchet MS">Trebuchet MS</option>
+          <option value="Verdana">Verdana</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <div class="form-group empty-row"></div>
+      <div class="form-group">
+        <p class="label">{{'LNAME' | translate}}</p>
+        <input type="text" tabindex="3" name="lname" class="form-control" ng-disabled="$ctrl.accountInfo.role === $ctrl.constants.ENTERPRISE_USER" ng-model="$ctrl.accountInfo.lname" placeholder="{{'LNAME' | translate}}" required>
+      </div>
+      <div class="form-group empty-row"></div>
+      <div class="form-group">
+        <p class="label">{{'CITY' | translate}}</p>
+        <input type="text" tabindex="6" name="city" class="form-control" ng-disabled="$ctrl.accountInfo.role === $ctrl.constants.ENTERPRISE_USER" ng-model="$ctrl.accountInfo.city" placeholder="{{'CITY' | translate}}" required>
+      </div>
+      <div class="form-group empty-row"></div>
+      <div class="form-group">
+        <p class="label">{{'SFONT_SIZE' | translate}}</p>
+        <select tabindex="9" class="form-control" ng-disabled="$ctrl.accountInfo.role === $ctrl.constants.ENTERPRISE_USER" ng-model="$ctrl.accountInfo.preferences.standardFontSize" required>
+          <option>10px</option>
+          <option>11px</option>
+          <option>12px</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>

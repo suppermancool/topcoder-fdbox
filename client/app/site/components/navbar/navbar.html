@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="pull-left">
+    <button ng-click="$ctrl.goToHome()">
+      <img ng-src="assets/images/fdbox-logo.png" />
+    </button>
+  </div>
+  <div class="pull-right">
+    <div class="btn-group action-buttons" role="group" ng-if="!$ctrl.Auth.isLoggedInSync()">
+      <button class="btn btn-default btn-call-action" role="button" ng-click="$ctrl.register()" onclick="this.blur()">{{'REGISTER' | translate}}</button>
+      <button class="btn btn-primary btn-call-action" role="button" ng-click="$ctrl.login()" onclick="this.blur()">{{'LOGIN' | translate}}</button>
+    </div>
+    <ul class="profile" ng-if="$ctrl.Auth.isLoggedInSync()">
+      <li class="account-settings">
+        <button ng-click="$ctrl.viewProfile()" class="clearfix btn-account-settings">
+          <div class="pull-left icon">
+            <img ng-src="assets/images/icon-people.png" />
+          </div>
+          <div class="pull-left greetings">
+            <p>
+              {{'WELCOME' | translate}}<br />
+              <strong>{{$ctrl.Auth.getCurrentUserSync().fname}}</strong>
+            </p>
+          </div>
+        </button>
+      </li>
+      <li class="logout" ng-click="$ctrl.logout()">
+        <button>
+          <img ng-src="assets/images/icon-sign-out.png" />
+        </button>
+      </li>
+    </ul>
+  </div>
+  <ul class="pull-left navi">
+    <li ng-class="{active: $ctrl.isActive('/')}">
+      <button ng-click="$ctrl.goToHome()">{{'HOME' | translate}}</button>
+    </li>
+    <li ng-class="{active: $ctrl.isActive('/products')}">
+      <button ng-click="$ctrl.goToProducts()" >{{'PRODUCTS' | translate}}</button>
+    </li>
+  </ul>
+</div>

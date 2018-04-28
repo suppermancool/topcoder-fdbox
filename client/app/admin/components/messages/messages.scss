@@ -1,0 +1,18 @@
+.message-table {
+  table-layout:fixed;
+  width: 100%;
+  .message-num {
+    width: 60px;
+  }
+
+  .message-text {
+    width: 1000px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    }
+}
+
+textarea.message-area {
+  height: 300px!important;
+}

@@ -1,0 +1,389 @@
+@import './app.variables';
+
+$icon-font-path: '/assets/fonts/bootstrap/';
+@import '~bootstrap-sass/assets/stylesheets/bootstrap';
+$fa-font-path: '/assets/fonts/font-awesome/';
+@import '~font-awesome/scss/font-awesome';
+// Fonts
+@font-face {
+  font-family: HelveticaNeue;
+  src: url("/assets/fonts/helvetica-neue/HelveticaNeue.ttf") format("truetype");
+  font-weight: 400;
+}
+@font-face {
+  font-family: HelveticaNeueLight;
+  src: url("/assets/fonts/helvetica-neue/HelveticaNeueLight.ttf") format("truetype");
+  font-weight: 400;
+}
+@font-face {
+  font-family: HelveticaNeueMedium;
+  src: url("/assets/fonts/helvetica-neue/HelveticaNeueMedium.ttf") format("truetype");
+  font-weight: 400;
+}
+@font-face {
+  font-family: HelveticaNeueBold;
+  src: url("/assets/fonts/helvetica-neue/HelveticaNeueBold.ttf") format("truetype");
+  font-weight: 600;
+}
+@font-face {
+  font-family: HelveticaNeueCondensedBold;
+  src: url("/assets/fonts/helvetica-neue/HelveticaNeueCondensedBold.ttf") format("truetype");
+  font-weight: 600;
+}
+@font-face {
+  font-family: DroidSerifBoldItalic;
+  src: url("/assets/fonts/droid-serif/DroidSerif-BoldItalic.ttf") format("truetype");
+  font-weight: 600;
+}
+.modal-open .site-modal {
+  overflow: hidden;
+}
+.site-modal {
+  .modal-dialog {
+    margin: 93px auto;
+  }
+
+  .modal-content {
+    border-radius: 0;
+  }
+
+  .site-data-modal{
+    height: 392px;
+    .modal-body{
+      height: 285px;
+      overflow-y:scroll;
+    }
+    .btn-default {
+      font-size: 12px;
+    }
+  }
+
+  .modal-header {
+    background-color: $dark-primary-color;
+
+    .modal-title {
+      font-family: HelveticaNeue;
+      font-size: 22px;
+      text-align: center;
+      color: $text-icons-color;
+    }
+  }
+
+
+  .modal-body {
+    padding: 25px 25px 40px;
+
+    .checkbox {
+      margin-top: 0;
+    }
+
+    .login-help-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 25px;
+
+      .login-help {
+        text-align: center;
+        font-size: 13px;
+        font-family: HelveticaNeueMedium;
+        color: $secondary-text-color;
+        margin-top: 5px;
+        padding: 0 15px;
+      }
+
+      .line {
+        height: 1px;
+        background-color: #e1e1e1;
+        flex: 1;
+      }
+
+      &.no-margin {
+        margin: 0;
+      }
+    }
+
+    form {
+      a {
+        color: $dark-primary-color;
+      }
+
+      p {
+        color: $secondary-text-color;
+        font-size: 12px;
+        text-align: center;
+      }
+    }
+  }
+
+  .modal-footer {
+    border-top-color: #e1e1e1;
+    padding: 7px 25px;
+    p {
+      margin-top: 10px;
+
+      a {
+        color: $dark-primary-color;
+      }
+    }
+  }
+}
+
+.modal-backdrop.in {
+  opacity: 0.4;
+}
+
+.form-group {
+  .input-group {
+    .form-control {
+      border-right: none;
+    }
+    .input-group-btn {
+      border: 1px solid #cccccc;
+      border-left: none;
+      .btn {
+        background-color: transparent;
+        i {
+          color: $dark-primary-color;
+          font-size: 20px;
+        }
+      }
+    }
+  }
+}
+.form-control {
+  border: 1px solid #cccccc;
+  border-radius: 2px;
+  height: 40px;
+
+  &::-webkit-input-placeholder {
+    color: #c5c5c5;
+  }
+
+  &:-moz-placeholder {
+    color: #c5c5c5;
+  }
+
+  &::-moz-placeholder {
+    color: #c5c5c5;
+  }
+
+  &:-ms-input-placeholder {
+    color: #c5c5c5;
+  }
+}
+
+.checkbox {
+  input[type=checkbox] {
+    display: none;
+  }
+
+  input[type=checkbox] + label {
+    display: inline-block;
+    padding-left: 25px;
+    background: url("/assets/images/checkbox-off.png") no-repeat;
+  }
+
+  input[type=checkbox]:checked + label {
+    background: url("/assets/images/checkbox-on.png") no-repeat;
+    display: inline-block;
+  }
+}
+.radio {
+  input[type=radio] {
+    display: none;
+  }
+
+  input[type=radio] + label {
+    display: inline-block;
+    padding-left: 25px;
+    background: url("/assets/images/radio-off.png") no-repeat;
+  }
+
+  input[type=radio]:checked + label {
+    background: url("/assets/images/radio-on.png") no-repeat;
+    display: inline-block;
+  }
+}
+.radio-group {
+  display: flex;
+  margin: 0 0 15px 0;
+  .col-xs-6 {
+    flex: 1;
+    border: 1px solid #cccccc;
+    padding: 0;
+    padding-left: 10px;
+  }
+}
+
+.btn-default {
+  color: $text-icons-color;
+  background-color: $primary-color;
+  border-color: $primary-color;
+  font-size: 15px;
+  font-family: HelveticaNeue;
+  border-radius: 3px;
+  padding: 6px 25px;
+
+  &:hover,
+  &.disabled:hover,
+  &.disabled:focus,
+  &[disabled]:hover,
+  &[disabled]:focus {
+    color: $text-icons-color;
+    background-color: $dark-primary-color;
+    border-color: $dark-primary-color;
+    outline: 0;
+  }
+
+  &:active,
+  &:focus,
+  &:active:hover,
+  &:active:focus {
+    color: $text-icons-color;
+    background-color: $primary-color;
+    border-color: $primary-color;
+    outline: 0;
+  }
+
+  &.btn-secondary {
+    background-color: transparent;
+    color: $primary-color;
+
+    &:active {
+      box-shadow: none;
+    }
+
+    &:hover {
+      background-color: $dark-primary-color;
+      color: $text-icons-color;
+    }
+  }
+}
+
+.btn-accent, .btn-danger {
+  color: $text-icons-color;
+  background-color: $accent-color;
+  border-color: $accent-color;
+  font-size: 15px;
+  font-family: HelveticaNeue;
+  border-radius: 3px;
+  padding: 6px 25px;
+  &:hover {
+    color: $text-icons-color;
+    background-color: $accent-color;
+    border-color: $accent-color;
+  }
+
+  &:active,
+  &:focus,
+  &:active:hover{
+    color: $text-icons-color;
+    background-color: $accent-color;
+    border-color: $accent-color;
+    outline: none;
+  }
+}
+
+.btn-primary {
+  color: $text-icons-color;
+  background-color: $primary-color;
+  border-color: $primary-color;
+  font-size: 15px;
+
+  &:hover {
+    color: $text-icons-color;
+    background-color: $dark-primary-color;
+    border-color: $dark-primary-color;
+  }
+
+  &:active,
+  &:focus,
+  &:active:hover,
+  &:active:focus {
+    color: $text-icons-color;
+    background-color: $dark-primary-color;
+    border-color: $dark-primary-color;
+  }
+}
+
+.btn-call-action {
+  border-radius: 22px;
+  padding: 8px 25px;
+  font-family: HelveticaNeueMedium;
+}
+
+html, body, ng-view, [ng-view], [data-ng-view] {
+  height: 100%;
+}
+
+body{
+  overflow-y: scroll!important;
+  padding-right: 0!important;
+}
+
+select{
+  appearance:none;
+  -moz-appearance:none; /* Firefox */
+  -webkit-appearance:none; /* Safari and Chrome */
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+a:focus {
+  outline: none;
+}
+
+.form-control,
+.has-error .form-control,
+.form-control:focus,
+.has-error .form-control:focus {
+  -webkit-box-shadow: none;
+  -moz-box-shadow:none;
+  box-shadow: none;
+}
+.ng-dirty {
+  &.ng-invalid-email, &.ng-invalid-required {
+    border-color: #a94442;
+  }
+}
+
+.button-link {
+  color: $dark-primary-color;
+  background-color: transparent;
+  border: 0;
+  padding: 0;
+  outline: 0;
+  text-decoration: none;
+  cursor: pointer;
+  &:hover, &:active, &:focus {
+    text-decoration: underline;
+    outline: 0;
+  }
+}
+
+// Component styles are injected through gulp
+/* inject:scss */
+@import 'admin/admin';
+@import 'admin/components/categories/categories';
+@import 'admin/components/footer/footer';
+@import 'admin/components/layout/admin-layout';
+@import 'admin/components/products/products';
+@import 'admin/components/users/users';
+@import 'admin/components/messages/messages';
+@import 'app.variables';
+@import 'loading.overlay';
+@import 'site/components/footer/footer';
+@import 'site/components/input-datepicker/input-datepicker';
+@import 'site/components/landing-page/landing-page';
+@import 'site/components/layout/site-layout';
+@import 'site/components/navbar/navbar';
+@import 'site/components/producs-page/producs-page';
+@import 'site/components/profile-page/profile-page';
+@import 'site/components/stripe-elements/stripe-elements';
+@import 'site/site';
+@import '../components/modal/modal';
+@import '../components/spinner/spinner';
+/* endinject */

@@ -1,0 +1,29 @@
+<div class="modal-header">
+  <h3 class="modal-title">{{!$ctrl.accountForm.id ? 'CREATE_NEW_ACC' : 'EDIT_ACC' | translate}}</h3>
+</div>
+<div class="modal-body">
+  <div class="alert alert-danger text-center" ng-if="$ctrl.error">{{$ctrl.error}}</div>
+  <form name="aF" novalidate ng-submit="aF.$valid && $ctrl.createUpdateAccount()">
+    <div class="row form-group">
+      <div class="col-xs-6">
+        <input type="text" name="fname" class="form-control" ng-model="$ctrl.accountForm.fname" placeholder="{{'FNAME' | translate}}" required />
+      </div>
+      <div class="col-xs-6">
+        <input type="text" name="lname" class="form-control" ng-model="$ctrl.accountForm.lname" placeholder="{{'LNAME' | translate}}" required />
+      </div>
+    </div>
+    <div class="form-group">
+      <input type="email" name="email" class="form-control" ng-model="$ctrl.accountForm.email" placeholder="{{'EMAIL' | translate}}" required />
+    </div>
+    <div class="form-group">
+      <input type="password" name="password" class="form-control" ng-model="$ctrl.accountForm.password" placeholder="{{'PASSWORD' | translate}}" required />
+    </div>
+    <button type="submit" class="hidden"></button>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-default btn-secondary" role="button" ng-class="{disabled: $ctrl.working}" ng-click="$ctrl.modal.dismiss()">{{'CANCEL_BACK' | translate}}</button>
+  <button class="btn btn-default" role="button" ng-class="{disabled: aF.$invalid || $ctrl.working}" ng-click="$ctrl.createUpdateAccount()">
+    {{!$ctrl.accountForm.id ? 'CREATE' : 'EDIT' | translate}}
+  </button>
+</div>

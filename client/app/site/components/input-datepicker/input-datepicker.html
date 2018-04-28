@@ -1,0 +1,9 @@
+<label>{{$ctrl.label}} <i class="fa fa-info" ng-if="$ctrl.tooltip" uib-tooltip="{{$ctrl.tooltip}}"></i></label>
+<div class="input-group">
+  <input type="text" name="{{$ctrl.name}}" class="form-control datepicker-input" ng-model="$ctrl.model" ng-keydown="$ctrl.keyPressed($event)"  date-format format="$ctrl.dateFormat"  onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false" autocomplete="off" auto-scroll required ng-focus="$ctrl.inputInFocus()" ng-blur="$ctrl.inputBlurred()"/>
+  <span class="input-group-btn" ng-class="{'input-group-focus': $ctrl.focusGroupIfExists}">
+    <button uib-popover-template="'producs-page/popovers/date-popover.html'" popover-placement="bottom-right" type="button" class="btn"   popover-is-open="$ctrl.dateOverlayOpened"  popover-animation="false" tabindex="-1">
+      <i class="fa fa-calendar-o"></i>
+    </button>
+  </span>
+</div>
