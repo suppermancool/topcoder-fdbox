@@ -87,8 +87,20 @@
             </div>
             <div ng-hide="$ctrl.stripeSuccess">
             <div class="form-group">
-              <div stripe-elements id="card-element" stripe="$ctrl.stripe" postal-code="$ctrl.registerForm.postcode" on-change="$ctrl.setOutcome(event)" callback="$ctrl.register()">
+              <div stripe-elements should-destroy="true" stripe="$ctrl.stripe" postal-code="$ctrl.registerForm.postcode" on-change="$ctrl.setOutcome(event)" callback="$ctrl.register()">
                 <!-- a Stripe Element will be inserted here. -->
+                <div class="strip-elements-wrapper" >
+                    <a href="https://stripe.com/"><img ng-src="assets/images/powered_by_stripe@3x.png" /></a>
+                </div>
+                <div id="card-number">
+                </div>
+                <div class="row-stripe-element">
+                    <div id="card-expiry" class="half-width left">
+                    </div>
+                    <div id="card-cvc" class="half-width right">
+                    </div>
+
+                </div>
               </div>
             </div>
             </div>

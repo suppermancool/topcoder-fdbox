@@ -5,16 +5,18 @@ import _ from 'lodash';
 import {saveAs} from 'file-saver';
 
 export class ProfilePage {
-  constructor($uibModal, Auth, StripeCheckout, Product, Modal, appConfig, constants, $rootScope, $translate, $http, $location, User) {
+  constructor($uibModal, Auth, StripeCheckout, Product, Modal, appConfig, constants, $rootScope, $translate, $http, $location, User, Stripe) {
     'ngInject';
 
     this.$uibModal = $uibModal;
     this.sortPropertyName = 'username';
     this.sortReverse = false;
     this.paginationPageNumm = 1;
+    this.strip = 1;
     this.paginationPageSize = 8;
     this.User = User;
     this.Auth = Auth;
+    this.stripe = Stripe;
     this.StripeCheckout = StripeCheckout;
     this.$http = $http;
     this.Modal = Modal;
@@ -24,21 +26,12 @@ export class ProfilePage {
     this.accounts = [];
     this.generatingPDF = [];
     this.$location = $location;
+    this.$rootScope = $rootScope;
+    // set up for stripe info
+    this.newStripeToken = null;
     // Listen for stripe token updates
     $rootScope.$on('StripeCheckoutToken', (e, token) => {
-      this.accountInfo.account.stripeSource = token.id;
-      this.Auth.updateMe({
-        account: {
-          stripeSource: token.id
-        }
-      })
-      .then(() => {
-        this.paymentUpdateOK = true;
-      })
-      .catch(err => {
-        console.error(err);
-        this.paymentUpdateError = err.statusText;
-      });
+      this.updatePaymentApi(token);
     });
 
     this.invoices = [];
@@ -218,6 +211,9 @@ export class ProfilePage {
     }
     this.profileUpdateOK = false;
     this.profileUpdateError = '';
+    this.accountInfo.account = {
+      stripeSource: '28T12'
+    };
     this.Auth.updateMe(this.accountInfo)
     .then(() => {
       this.profileUpdateOK = true;
@@ -277,6 +273,52 @@ export class ProfilePage {
       currency: this.defaultSubscriptionPlan.currency,
       panelLabel: 'Subscribe, Pay {{amount}}',
       email: this.accountInfo.email
+    });
+  }
+  // Common SetOutcome Function
+  setOutcome(result) {
+    this.paymentUpdateOK = false;
+    this.paymentUpdateError = null;
+    if(result.token) {
+      // Use the token to create a charge or a customer
+      this.newStripeToken = result.token;
+      this.paymentUpdateOK = true;
+    } else if(result.error) {
+      this.paymentUpdateError = result.error.message;
+    }
+    this.$rootScope.$evalAsync();
+  }
+  /**
+   * Prepare Before Update Payment Method
+   */
+  prepareBeforeUpdatePayment() {
+    this.$rootScope.$broadcast('StripeCreateToken');
+  }
+  /**
+   * Update Payment Method
+   */
+  updatePayment() {
+    if(this.newStripeToken !== null) {
+      this.$rootScope.$emit('StripeCheckoutToken', this.newStripeToken);
+    }
+  }
+  /**
+   * Call api for Update Payment Method
+   */
+  updatePaymentApi(token) {
+    this.accountInfo.account.stripeSource = token.id;
+    this.Auth.updateMe({
+      account: {
+        stripeSource: token.id
+      }
+    })
+    .then(() => {
+      this.paymentUpdateOK = true;
+      this.paymentUpdateError = null;
+    })
+    .catch(err => {
+      console.error(err);
+      this.paymentUpdateError = err.statusText;
     });
   }
 }

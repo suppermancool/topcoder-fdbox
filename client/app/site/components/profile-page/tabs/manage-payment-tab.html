@@ -7,9 +7,23 @@
 <div class="alert alert-danger" ng-show="$ctrl.paymentUpdateError">
   {{$ctrl.paymentUpdateError}}
 </div>
-<p>
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tempor maximus ipsum, vel sodales lacus. Quisque est dui, laoreet ut pulvinar et, vestibulum vitae sapien. Suspendisse quis dictum metus. Integer non urna maximus, imperdiet felis id, lobortis ante. Etiam a lacus at lectus volutpat lacinia. In a nulla vitae velit sagittis ultricies. Integer mollis risus ornare nulla convallis rutrum.
-</p>
-<p class="text-center">
-  <button class="btn btn-default" role="button" ng-click="$ctrl.stripeCheckout()">{{'MANAGE_PAYMENT' | translate}}</button>
+
+
+<div stripe-elements should-destroy="false" stripe="$ctrl.stripe" postal-code="$ctrl.registerForm.postcode" on-change="$ctrl.setOutcome(event)" callback="$ctrl.registerPayment()">
+  <!-- a Stripe Element will be inserted here. -->
+  <div class="strip-elements-wrapper" >
+      <a href="https://stripe.com/"><img ng-src="assets/images/powered_by_stripe@3x.png" /></a>
+  </div>
+  <div id="card-number">
+  </div>
+  <div class="row-stripe-element">
+      <div id="card-expiry" class="half-width left">
+      </div>
+      <div id="card-cvc" class="half-width right">
+      </div>
+
+  </div>
+</div>
+<p class="text-center btn-update-payment">
+  <button class="btn btn-default" role="button" ng-click="$ctrl.prepareBeforeUpdatePayment()">{{'UPDATE' | translate}}</button>
 </p>
