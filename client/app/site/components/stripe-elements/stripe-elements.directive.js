@@ -22,7 +22,7 @@ export default angular.module('fbdoxApp.stripe-elements', [])
         base: {
           iconColor: '#8898AA',
           color: '#555',
-          lineHeight: '36px',
+          lineHeight: '26px',
           fontWeight: 400,
           fontSize: '14px',
           '::placeholder': {
@@ -35,8 +35,8 @@ export default angular.module('fbdoxApp.stripe-elements', [])
         }
       },
       classes: {
-        focus: 'is-focused',
-        empty: 'is-empty',
+        // focus: 'is-focused',
+        // empty: 'is-empty',
       },
       hidePostalCode: true,
       value: {postalCode: scope.postalCode}
@@ -66,10 +66,12 @@ export default angular.module('fbdoxApp.stripe-elements', [])
     const createToken = () => {
       scope.stripe.createToken(cardNumber, cardExpiry, cardCvc).then(event => {
         scope.onChange({event});
-        if(event.token && scope.shouldDestroy) {
-          cardNumber.destroy();
-          cardExpiry.destroy();
-          cardCvc.destroy();
+        if(event.token) {
+          if(scope.shouldDestroy) {
+            cardNumber.destroy();
+            cardExpiry.destroy();
+            cardCvc.destroy();
+          }
           scope.callback();
         }
       });
