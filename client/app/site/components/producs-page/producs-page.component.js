@@ -59,6 +59,12 @@ export class ProducsPage {
   }
 
   $onInit() {
+    document.body.addEventListener('keypress', event => {
+      if(event.keyCode === 13 && this.activeStep >= 3) {
+        this.stepNext();
+      }
+    });
+
     if(this.idInterview) {
       this.activeStep = 2;
       this.getSavedInterview(this.idInterview).then(res => {
@@ -478,7 +484,6 @@ export class ProducsPage {
       this.activeTitle = text;
     });
   }
-
   /**
    * step next
    */
