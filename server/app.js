@@ -11,6 +11,7 @@ mongoose.Promise = require('bluebird');
 import config from './config/environment';
 import http from 'http';
 import seedDatabaseIfNeeded from './config/seed';
+import cronJobForDeleteGeneralDocument from './config/deleteGeneralDocument';
 import stripe from './components/stripe';
 import _ from 'lodash';
 
@@ -37,6 +38,7 @@ function startServer() {
 }
 
 seedDatabaseIfNeeded();
+cronJobForDeleteGeneralDocument();
 setImmediate(startServer);
 
 // Create Stripe Plans
