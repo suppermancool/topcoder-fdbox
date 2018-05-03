@@ -106,6 +106,7 @@ ProductSchema
       }
       return stripe.products.create({
         name: this.title,
+        type: 'good',
         description: this.description,
         url: `http://fbdox.at/api/products/${this.id}`,
         shippable: false,

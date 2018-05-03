@@ -6,7 +6,7 @@
 'use strict';
 import fs from 'fs';
 import cron from 'cron';
-import config from './environment';
+import config from '../server/config/environment';
 
 function deleteFolderRecursive(path) {
   if(fs.existsSync(path)) {
@@ -26,7 +26,6 @@ const uploadDir = `${config.uploads.dir}/${config.uploads.docs}`;
 const oneMonth = 1000 * 60 * 60 * 24 * 31;
 
 function checkForDeleteGeneralDocument() {
-  console.log('checkForDeleteGeneralDocument');
   if(fs.existsSync(uploadDir)) {
     fs.readdirSync(uploadDir).forEach(file => {
       let fullDir = `${uploadDir}/${file}`;
@@ -64,4 +63,5 @@ export default function cronJobForDeleteGeneralDocument() {
   true, /* Start the job right now */
   );
   console.log('cron job next time', job.nextDates()); // job1 status true
+  checkForDeleteGeneralDocument();
 }
