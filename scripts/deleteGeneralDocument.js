@@ -6,21 +6,8 @@
 'use strict';
 import fs from 'fs';
 import cron from 'cron';
+import rmdir from 'rimraf';
 import config from '../server/config/environment';
-
-function deleteFolderRecursive(path) {
-  if(fs.existsSync(path)) {
-    fs.readdirSync(path).forEach(file => {
-      const curPath = `${path}/${file}`;
-      if(fs.lstatSync(curPath).isDirectory()) { // recurse
-        deleteFolderRecursive(curPath);
-      } else { // delete file
-        fs.unlinkSync(curPath);
-      }
-    });
-    fs.rmdirSync(path);
-  }
-}
 
 const uploadDir = `${config.uploads.dir}/${config.uploads.docs}`;
 const oneMonth = 1000 * 60 * 60 * 24 * 31;
@@ -34,15 +21,9 @@ function checkForDeleteGeneralDocument() {
           const birthtimeMs = stats.birthtimeMs;
           const timeStamp = Math.floor(Date.now());
           const durationByMonth = (timeStamp - birthtimeMs) / oneMonth;
-          // deletes generated documents after 1 month
           if(durationByMonth >= 1) {
-            if(stats.isFile()) {
-              fs.unlinkSync(fullDir);
-              console.log(`removed file: ${fullDir}`);
-            } else {
-              deleteFolderRecursive(fullDir);
-              console.log(`removed folder: ${fullDir}`);
-            }
+            rmdir(fullDir, () => {});
+            console.log(`removed : ${fullDir}`);
           }
         }
       });
